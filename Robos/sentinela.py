@@ -1,13 +1,22 @@
 import time
 import socket
 import logging
+from logging.handlers import RotatingFileHandler
 from datetime import datetime
 
-# --- CONFIGURAÇÃO DO ARQUITETO ---
-# Aqui definimos que o "diário" será salvo num arquivo chamado sentinela.log
-# level=logging.INFO significa que queremos registrar informações gerais e erros.
+# --- CONFIGURAÇÃO DO ARQUITETO (VERSÃO BLINDADA) ---
+# Definimos um Handler que rotaciona o arquivo para ele não crescer infinitamente.
+# maxBytes = 5MB (5 * 1024 * 1024)
+# backupCount = 3 (Mantém o atual + 3 arquivos antigos de histórico)
+log_handler = RotatingFileHandler(
+    'sentinela.log', 
+    maxBytes=5*1024*1024, 
+    backupCount=3
+)
+
+# Aplicamos a configuração usando o nosso handler rotativo
 logging.basicConfig(
-    filename='sentinela.log', 
+    handlers=[log_handler],
     level=logging.INFO, 
     format='%(asctime)s - %(levelname)s - %(message)s',
     datefmt='%Y-%m-%d %H:%M:%S'
@@ -22,8 +31,8 @@ def checar_conexao():
     except OSError:
         return False
 
-print("🛡️  Sentinela iniciado. Rodando em background...")
-print("📝  Verifique o arquivo 'sentinela.log' para o histórico.")
+print("🛡️  Sentinela iniciado. Rodando em background com proteção de log...")
+print("📝  Verifique o arquivo 'sentinela.log'. Limite automático: 5MB.")
 
 # --- O LOOP INFINITO (DAEMON) ---
 while True:

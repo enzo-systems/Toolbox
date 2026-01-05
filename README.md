@@ -7,13 +7,13 @@ Este repositório serve como laboratório pessoal para testes de Web Scraping, P
 ### 🤖 /Robos 
 Scripts utilitários e agentes autônomos.
 - **[guru_linux.py](./Robos/guru_linux.py)**: Feat: Adiciona ferramenta Guru Linux para o terminal (2026-01-05)
-- **[memoria_world.json](./Robos/memoria_world.json)**: Novo arquivo (Aguardando commit)
-- **[news_sniper.py](./Robos/news_sniper.py)**: Novo arquivo (Aguardando commit)
-- **[news_sniper_world.py](./Robos/news_sniper_world.py)**: Novo arquivo (Aguardando commit)
-- **[robo_vagas.py](./Robos/robo_vagas.py)**: Novo arquivo (Aguardando commit)
+- **[memoria_world.json](./Robos/memoria_world.json)**: Last commit message (2026-01-05)
+- **[news_sniper.py](./Robos/news_sniper.py)**: Last commit message (2026-01-05)
+- **[news_sniper_world.py](./Robos/news_sniper_world.py)**: Last commit message (2026-01-05)
+- **[robo_vagas.py](./Robos/robo_vagas.py)**: Last commit message (2026-01-05)
 - **[sentinela.py](./Robos/sentinela.py)**: New: Adiciona monitor de rede Sentinela (2026-01-05)
-- **[ssl_hunter.py](./Robos/ssl_hunter.py)**: Novo arquivo (Aguardando commit)
-- **[teste_robo.py](./Robos/teste_robo.py)**: Novo arquivo (Aguardando commit)
+- **[ssl_hunter.py](./Robos/ssl_hunter.py)**: Last commit message (2026-01-05)
+- **[teste_robo.py](./Robos/teste_robo.py)**: Last commit message (2026-01-05)
 
 ### 🖼️ /Imagens
 Ferramentas de manipulação de imagem e processamento visual.
