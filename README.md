@@ -2,7 +2,7 @@
 
 ### 📂 Estrutura do Projeto
 Coleção de scripts e ferramentas de automação desenvolvidas em Python, com foco em ambiente Linux (Fedora).
-Este repositório serve como laboratório pessoal para testes de Web Scraping, Processamento de Imagens, Manipulação de Áudio, Segurança de Redes e Processos em Background (Daemons).
+Este repositório serve como laboratório pessoal para testes de Web Scraping, Processamento de Imagens, Manipulação de Áudio, Segurança de Redes e Processos em Background (Daemons). 
 
 ### 🤖 /Robos
 Scripts utilitários e agentes autônomos.
