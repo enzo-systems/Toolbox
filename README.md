@@ -6,12 +6,16 @@ Este repositório serve como laboratório pessoal para testes de Web Scraping, P
 
 ### 🤖 /Robos
 Scripts utilitários e agentes autônomos.
+- **[guru_linux.py](./Robos/guru_linux.py)**: Feat: Adiciona ferramenta Guru Linux para o terminal (2026-01-05)
+- **[sentinela.py](./Robos/sentinela.py)**: New: Adiciona monitor de rede Sentinela (2026-01-05)
 
 ### 🖼️ /Imagens
 Ferramentas de manipulação de imagem e processamento visual.
+- **[corta_foto.py](./Imagens/corta_foto.py)**: Feat: Restaura módulo de Processamento de Imagens (2026-01-05)
 
 ### 🎙️ /CloneVoz
 Ferramentas de manipulação clonagem de voz.
+- **[robo_enzo.py](./CloneVoz/robo_enzo.py)**: Feat: Restaura módulo CloneVoz e dependências (2026-01-05)
 
 ### 🚀 /Tecnologias
 - **Linguagem:** Python 3.x
