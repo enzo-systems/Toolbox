@@ -11,3 +11,4 @@ Scripts utilitários.
 - **[sentinela.py](sentinela.py)**: Last commit (2026-01-05) | *ROBÔ: SENTINELA FUNÇÃO: Monitora a conexão de rede a cada 60 segundos e evita que o log cresça demais. STATUS: Operacional com rotação de logs.*
 - **[ssl_hunter.py](ssl_hunter.py)**: Last commit (2026-01-05) | *ROBÔ: SSL HUNTER FUNÇÃO: faz auditoria de segurança em sites específicos. STATUS: Ativo e funcional.*
 - **[teste_robo.py](teste_robo.py)**: Last commit (2026-01-05) | *ROBÔ: SSL HUNTER FUNÇÃO: acessa todas as informações de sites específicos. STATUS: Ativo e funcional.*
+- **[watchdog_sentinela.py](watchdog_sentinela.py)**: Novo arquivo (Aguardando commit) | *ROBÔ: WATCHDOG SENTINELA FUNÇÃO: Vigia o status do serviço Sentinela via systemctl e avisa o Arquiteto se cair. STATUS: Nível 1 - Operador Invisível.*
