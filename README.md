@@ -25,6 +25,21 @@ Ferramentas de manipulação de imagem e processamento visual.
 Ferramentas de manipulação clonagem de voz.
 - **[robo_enzo.py](./CloneVoz/robo_enzo.py)**: Last commit (2026-01-05) | *ROBÔ: MULTIMÍDIA FUNÇÃO: Transforma um roteiro escrito em áudio baseado na voz sintética do roteirista. STATUS: Testando integração com APIs externas.*
 
+### 📂 /Scripts
+- **[backup_toolbox.sh](./Scripts/backup_toolbox.sh)**: message commit (2026-01-06) | *==============================================================================*
+
+### ⚙️ /Config
+- *Pasta estruturada (aguardando arquivos de sistema).*
+
+### 🐳 /Docker
+- *Pasta estruturada (aguardando arquivos de sistema).*
+
+### 📚 /Docs
+- *Pasta estruturada (aguardando arquivos de sistema).*
+
+### 📝 /Logs
+- *Pasta estruturada (aguardando arquivos de sistema).*
+
 ### 🚀 /Tecnologias
 - **Linguagem:** Python 3.x
 - **OS:** Linux (Fedora/Debian)
