@@ -6,22 +6,22 @@ Este repositório serve como laboratório pessoal para testes de Web Scraping, P
 
 ### 🤖 /Robos 
 Scripts utilitários e agentes autônomos.
-- **[guru_linux.py](./Robos/guru_linux.py)**: Feat: Adiciona ferramenta Guru Linux para o terminal (2026-01-05) | *ROBÔ: GURU FUNÇÃO: Analisa logs e fornece diagnósticos preditivos sobre o status do sistema. STATUS: Em desenvolvimento / Alpha.*
+- **[guru_linux.py](./Robos/guru_linux.py)**: Last commit (2026-01-05) | *ROBÔ: GURU FUNÇÃO: Analisa logs e fornece diagnósticos preditivos sobre o status do sistema. STATUS: Em desenvolvimento / Alpha.*
 - **[memoria_world.json](./Robos/memoria_world.json)**: Last commit message (2026-01-05)
-- **[news_sniper.py](./Robos/news_sniper.py)**: Last commit message (2026-01-05) | *ROBÔ: SNIPER FUNÇÃO: Procura informações específicas em sites específicos. STATUS: Ativo e funcional.*
-- **[news_sniper_world.py](./Robos/news_sniper_world.py)**: Last commit message (2026-01-05) | *ROBÔ: SNIPER FUNÇÃO: Procura informações específicas em toda internet. STATUS: Ativo e funcional.*
-- **[robo_vagas.py](./Robos/robo_vagas.py)**: Last commit message (2026-01-05) | *ROBÔ: SNIPER FUNÇÃO: Procura informações vagas de empregos em sites específicos. STATUS: Ativo e funcional.*
-- **[sentinela.py](./Robos/sentinela.py)**: feat: implementa rotação de logs (2026-01-05) | *ROBÔ: SENTINELA FUNÇÃO: Monitora a conexão de rede a cada 60 segundos e evita que o log cresça demais. STATUS: Operacional com rotação de logs.*
-- **[ssl_hunter.py](./Robos/ssl_hunter.py)**: Last commit message (2026-01-05) | *ROBÔ: SSL HUNTER FUNÇÃO: faz auditoria de segurança em sites específicos. STATUS: Ativo e funcional.*
-- **[teste_robo.py](./Robos/teste_robo.py)**: Last commit message (2026-01-05) | *ROBÔ: SSL HUNTER FUNÇÃO: acessa todas as informações de sites específicos. STATUS: Ativo e funcional.*
+- **[news_sniper.py](./Robos/news_sniper.py)**: Last commit (2026-01-05) | *ROBÔ: SNIPER FUNÇÃO: Procura informações específicas em sites específicos. STATUS: Ativo e funcional.*
+- **[news_sniper_world.py](./Robos/news_sniper_world.py)**: Last commit (2026-01-05) | *ROBÔ: SNIPER FUNÇÃO: Procura informações específicas em toda internet. STATUS: Ativo e funcional.*
+- **[robo_vagas.py](./Robos/robo_vagas.py)**: Last commit (2026-01-05) | *ROBÔ: SNIPER FUNÇÃO: Procura informações vagas de empregos em sites específicos. STATUS: Ativo e funcional.*
+- **[sentinela.py](./Robos/sentinela.py)**: Last commit (2026-01-05) | *ROBÔ: SENTINELA FUNÇÃO: Monitora a conexão de rede a cada 60 segundos e evita que o log cresça demais. STATUS: Operacional com rotação de logs.*
+- **[ssl_hunter.py](./Robos/ssl_hunter.py)**: Last commit (2026-01-05) | *ROBÔ: SSL HUNTER FUNÇÃO: faz auditoria de segurança em sites específicos. STATUS: Ativo e funcional.*
+- **[teste_robo.py](./Robos/teste_robo.py)**: Last commit (2026-01-05) | *ROBÔ: SSL HUNTER FUNÇÃO: acessa todas as informações de sites específicos. STATUS: Ativo e funcional.*
 
 ### 🖼️ /Imagens
 Ferramentas de manipulação de imagem e processamento visual.
-- **[corta_foto.py](./Imagens/corta_foto.py)**: Feat: Restaura módulo de Processamento de Imagens (2026-01-05) | *ROBÔ: MULTIMÍDIA FUNÇÃO: Processamento automatizado Redimensionamento de Foto). STATUS: Testando integração com APIs externas.*
+- **[corta_foto.py](./Imagens/corta_foto.py)**: Last commit (2026-01-05) | *ROBÔ: MULTIMÍDIA FUNÇÃO: Processamento automatizado Redimensionamento de Foto). STATUS: Testando integração com APIs externas.*
 
 ### 🎙️ /CloneVoz
 Ferramentas de manipulação clonagem de voz.
-- **[robo_enzo.py](./CloneVoz/robo_enzo.py)**: Feat: Restaura módulo CloneVoz e dependências (2026-01-05) | *ROBÔ: MULTIMÍDIA FUNÇÃO: Transforma um roteiro escrito em áudio baseado na voz sintética do roteirista. STATUS: Testando integração com APIs externas.*
+- **[robo_enzo.py](./CloneVoz/robo_enzo.py)**: Last commit (2026-01-05) | *ROBÔ: MULTIMÍDIA FUNÇÃO: Transforma um roteiro escrito em áudio baseado na voz sintética do roteirista. STATUS: Testando integração com APIs externas.*
 
 ### 🚀 /Tecnologias
 - **Linguagem:** Python 3.x
