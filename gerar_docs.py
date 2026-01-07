@@ -9,12 +9,16 @@ import os
 import re
 import subprocess
 
-# --- 1. MANIFESTO DO PROJETO (O CORAÇÃO) ---
-MANIFESTO = """# 🛠️ ToolBox - Laboratório de Automação
+# --- 1. MANIFESTO DO PROJETO (VISÃO ARQUITETURAL) ---
+MANIFESTO = """# 🛠️ ToolBox - Ecossistema de Automação Sênior
 
-### 📂 Estrutura do Projeto
-Coleção de scripts e ferramentas de automação desenvolvidas em Python, com foco em ambiente Linux (Fedora/Debian).   
-Este repositório serve como laboratório pessoal para testes de Web Scraping, Processamento de Imagens, Manipulação de Áudio, Segurança de Redes e Processos em Background (Daemons).
+### 📂 Visão Geral e Arquitetura
+Este repositório é um ecossistema de automação modular desenvolvido para ambiente **Linux (Fedora/Debian/Ubuntu)**. O projeto integra agentes inteligentes e utilitários de infraestrutura sob uma arquitetura de níveis (1 a 4), focando em:
+
+* **Inteligência de Dados:** Agentes autônomos para extração e processamento via *Web Scraping* e integração com *APIs REST*.
+* **Segurança e Redes:** Ferramentas de auditoria de criptografia (SSL) e diagnóstico de conectividade de baixo nível.
+* **Processamento de Mídia:** Pipelines para manipulação de imagem e síntese vocal, explorando automação visual e auditiva.
+* **Resiliência de Sistema:** Scripts de manutenção de infraestrutura e gestão de processos em background (*Daemons*) com foco em persistência estruturada em CSV e JSON.
 
 ---
 """
