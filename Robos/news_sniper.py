@@ -1,7 +1,9 @@
 """
-ROBÔ: SNIPER
+Docstring-------------------------------------------------
+ROBÔ: Web Scraping
 FUNÇÃO: Procura informações específicas em sites específicos.
-STATUS: Ativo e funcional.
+        Ou seja, Coletor de Dados: Raspagem de notícias.
+STATUS: Ativo e funcional - Nível 2
 """
 import requests
 from bs4 import BeautifulSoup
@@ -17,7 +19,7 @@ URL_ALVO = "https://www.tabnews.com.br"
 PALAVRAS_CHAVE = ["inteligência artificial", "linux", "python"]
 
 # Onde guardar a memória do que já vimos?
-ARQUIVO_MEMORIA = "Robos/memoria_news.json"
+ARQUIVO_MEMORIA = "Logs/memoria_news.json"
 
 def carregar_memoria():
     """Lê o arquivo JSON para saber quais notícias já processamos."""
