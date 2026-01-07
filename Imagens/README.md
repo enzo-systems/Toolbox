@@ -1,7 +1,6 @@
-# 🖼️ Módulo de Processamento Visual
+# 📁 /Imagens
 
-Ferramentas baseadas em PIL (Pillow) para manipulação de imagens em lote.
-Inclui diretório `Assets` para inputs e outputs de teste.
+> Módulos de Processamento Visual e Manipulação de Imagens (Nível 3).
 
-## 📜 Lista de Scripts
-- **[corta_foto.py](corta_foto.py)**: Last commit (2026-01-05) | *ROBÔ: MULTIMÍDIA FUNÇÃO: Processamento automatizado Redimensionamento de Foto). STATUS: Testando integração com APIs externas.*
+## 📜 Arquivos
+- **[corta_foto.py](./corta_foto.py)**: Last commit (2026-01-05) | *ROBÔ: MULTIMÍDIA FUNÇÃO: Processamento automatizado Redimensionamento de Foto). STATUS: Testando integração com APIs externas.*

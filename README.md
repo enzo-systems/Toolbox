@@ -5,6 +5,7 @@ Coleção de scripts e ferramentas de automação desenvolvidas em Python, com f
 Este repositório serve como laboratório pessoal para testes de Web Scraping, Processamento de Imagens, Manipulação de Áudio, Segurança de Redes e Processos em Background (Daemons). 
 
 ### 🤖 /Robos
+Agentes autônomos e scripts de monitoramento/extração de dados (Nível 2).
 - **[cotacao_dolar.py](./Robos/cotacao_dolar.py)**: Last Config (2026-01-07) | *Docstring - ROBÔ: SENTINELA FINANCEIRO FUNÇÃO: Captura cotação do dólar via API e mantém histórico em CSV. Ou seja, Integrador de API: Captura dados financeiros profissionais e gera histórico. STATUS: Operacional - Nível 2.*
 - **[guru_linux.py](./Robos/guru_linux.py)**: Last Config (2026-01-07) | *Docstring - ROBÔ: GURU FUNÇÃO: Analisa logs e fornece diagnósticos preditivos sobre o status do sistema. Ou seja, Diagnóstico: Analisador de logs do sistema (Alpha). STATUS: Em desenvolvimento / Alpha - Nível 1*
 - **[news_sniper.py](./Robos/news_sniper.py)**: Last Config (2026-01-07) | *Docstring - ROBÔ: Web Scraping FUNÇÃO: Procura informações específicas em sites específicos. Ou seja, Coletor de Dados: Raspagem de notícias. STATUS: Ativo e funcional - Nível 2*
@@ -17,25 +18,32 @@ Este repositório serve como laboratório pessoal para testes de Web Scraping, P
 - **[watchdog_sentinela.py](./Robos/watchdog_sentinela.py)**: Last Config (2026-01-07) | *Docstring - ROBÔ: SENTINELA FUNÇÃO: Vigia o status do serviço Sentinela via systemctl e avisa o Arquiteto se cair. Ou seja, Vigias dos Vigias: Garante que o Sentinela esteja rodando via systemctl STATUS: Operador Invisível - Nível 1.*
 
 ### 🖼️ /Imagens
+Módulos de Processamento Visual e Manipulação de Imagens (Nível 3).
 - **[corta_foto.py](./Imagens/corta_foto.py)**: Last commit (2026-01-05) | *ROBÔ: MULTIMÍDIA FUNÇÃO: Processamento automatizado Redimensionamento de Foto). STATUS: Testando integração com APIs externas.*
 
 ### 🎙️ /CloneVoz
+Módulos de Processamento de Áudio e Síntese Vocal.
 - **[robo_enzo.py](./CloneVoz/robo_enzo.py)**: Last commit (2026-01-05) | *ROBÔ: MULTIMÍDIA FUNÇÃO: Transforma um roteiro escrito em áudio baseado na voz sintética do roteirista. STATUS: Testando integração com APIs externas.*
 
 ### 📂 /Scripts
+Utilitários de Automação de Infraestrutura e Manutenção de Sistema (Nível 1).
 - **[backup_toolbox.sh](./Scripts/backup_toolbox.sh)**: Last Config (2026-01-07) | *FUNÇÃO: Automação de Infraestrutura - Backup incremental do repositório ToolBox.*
 
 ### ⚙️ /Config
-- *Pasta estruturada (aguardando arquivos de sistema).*
+Gestor de Parâmetros, Variáveis de Ambiente e Definições Globais (Nível 1).
+- *Pasta organizada (aguardando módulos).*
 
 ### 🐳 /Docker
-- *Pasta estruturada (aguardando arquivos de sistema).*
+Orquestrador de Containers e Ambientes Isolados (Nível 1).
+- *Pasta organizada (aguardando módulos).*
 
 ### 📚 /Docs
-- *Pasta estruturada (aguardando arquivos de sistema).*
+Repositório de Documentação Técnica e Manuais do Projeto.
+- *Pasta organizada (aguardando módulos).*
 
 ### 📝 /Logs
-- *Pasta estruturada (aguardando arquivos de sistema).*
+Registro de Atividades, Históricos e Depuração de Processos.
+- *Pasta organizada (aguardando módulos).*
 
 ### 🚀 /Tecnologias
 - **Linguagem:** Python 3.x

@@ -1,15 +1,15 @@
-# 🤖 Robos
+# 📁 /Robos
 
-Scripts utilitários.
+> Agentes autônomos e scripts de monitoramento/extração de dados (Nível 2).
 
-## 📜 Lista de Scripts
-- **[guru_linux.py](guru_linux.py)**: Last commit (2026-01-05) | *ROBÔ: GURU FUNÇÃO: Analisa logs e fornece diagnósticos preditivos sobre o status do sistema. STATUS: Em desenvolvimento / Alpha.*
-- **[memoria_world.json](memoria_world.json)**: Last commit message (2026-01-05)
-- **[news_sniper.py](news_sniper.py)**: Last commit (2026-01-05) | *ROBÔ: SNIPER FUNÇÃO: Procura informações específicas em sites específicos. STATUS: Ativo e funcional.*
-- **[news_sniper_world.py](news_sniper_world.py)**: Last commit (2026-01-05) | *ROBÔ: SNIPER FUNÇÃO: Procura informações específicas em toda internet. STATUS: Ativo e funcional.*
-- **[robo_vagas.py](robo_vagas.py)**: Last commit (2026-01-05) | *ROBÔ: SNIPER FUNÇÃO: Procura informações vagas de empregos em sites específicos. STATUS: Ativo e funcional.*
-- **[sentinela.py](sentinela.py)**: Last commit (2026-01-05) | *ROBÔ: SENTINELA FUNÇÃO: Monitora a conexão de rede a cada 60 segundos e evita que o log cresça demais. STATUS: Operacional com rotação de logs.*
-- **[sentinela_web.py](sentinela_web.py)**: Message Commit (2026-01-06) | *ROBÔ: SENTINELA FUNÇÃO: Navega na Internet como um agent. STATUS: Operacional com rotação de logs.*
-- **[ssl_hunter.py](ssl_hunter.py)**: Last commit (2026-01-05) | *ROBÔ: SSL HUNTER FUNÇÃO: faz auditoria de segurança em sites específicos. STATUS: Ativo e funcional.*
-- **[teste_robo.py](teste_robo.py)**: Last commit (2026-01-05) | *ROBÔ: SSL HUNTER FUNÇÃO: acessa todas as informações de sites específicos. STATUS: Ativo e funcional.*
-- **[watchdog_sentinela.py](watchdog_sentinela.py)**: Last commit (2026-01-05) | *ROBÔ: WATCHDOG SENTINELA FUNÇÃO: Vigia o status do serviço Sentinela via systemctl e avisa o Arquiteto se cair. STATUS: Nível 1 - Operador Invisível.*
+## 📜 Arquivos
+- **[cotacao_dolar.py](./cotacao_dolar.py)**: Last Config (2026-01-07) | *Docstring - ROBÔ: SENTINELA FINANCEIRO FUNÇÃO: Captura cotação do dólar via API e mantém histórico em CSV. Ou seja, Integrador de API: Captura dados financeiros profissionais e gera histórico. STATUS: Operacional - Nível 2.*
+- **[guru_linux.py](./guru_linux.py)**: Last Config (2026-01-07) | *Docstring - ROBÔ: GURU FUNÇÃO: Analisa logs e fornece diagnósticos preditivos sobre o status do sistema. Ou seja, Diagnóstico: Analisador de logs do sistema (Alpha). STATUS: Em desenvolvimento / Alpha - Nível 1*
+- **[news_sniper.py](./news_sniper.py)**: Last Config (2026-01-07) | *Docstring - ROBÔ: Web Scraping FUNÇÃO: Procura informações específicas em sites específicos. Ou seja, Coletor de Dados: Raspagem de notícias. STATUS: Ativo e funcional - Nível 2*
+- **[news_sniper_world.py](./news_sniper_world.py)**: Last Config (2026-01-07) | *Docstring - ROBÔ: Web Scraping FUNÇÃO: Procura informações específicas em toda internet. Ou seja, Coletor de Dados: Raspagem de notícias. STATUS: Ativo e funcional - Nível 2*
+- **[robo_vagas.py](./robo_vagas.py)**: Last Config (2026-01-07) | *Docstring - ROBÔ: Web Scraper FUNÇÃO: Procura informações vagas de empregos em sites específicos. Ou seja, Coletor de Dados: Busca oportunidades em sites específicos. STATUS: Ativo e funcional - Nível 2*
+- **[sentinela.py](./sentinela.py)**: Last Config (2026-01-07) | *Docstring - ROBÔ: SENTINELA FUNÇÃO: Monitora a conexão de rede a cada 60 segundos e evita que o log cresça demais. Ou seja, Zelador de Infra: Monitora rede e rotaciona logs para não encher o disco. STATUS: Operacional com rotação de logs - Nivel 1.*
+- **[sentinela_web.py](./sentinela_web.py)**: Last Config (2026-01-07) | *DDocstring - ROBÔ: SENTINELA FUNÇÃO: Navega na Internet como um Agent. Ou seja, Agente Navegador: Navega na web como um agente autônomo. STATUS: Operacional com rotação de logs - Nível 2.*
+- **[ssl_hunter.py](./ssl_hunter.py)**: Last Config (2026-01-07) | *Docstring - ROBÔ: SSL HUNTER FUNÇÃO: Faz auditoria de segurança em sites específicos. Ou seja, Auditor de Segurança: Checa certificados SSL de sites externos. STATUS: Ativo e funcional - Nível 2*
+- **[teste_robo.py](./teste_robo.py)**: Last Config (2026-01-07) | *Docstring - ROBÔ: Web Scraper FUNÇÃO: acessa todas as informações de sites específicos. STATUS: Ativo e funcional - Nível 2*
+- **[watchdog_sentinela.py](./watchdog_sentinela.py)**: Last Config (2026-01-07) | *Docstring - ROBÔ: SENTINELA FUNÇÃO: Vigia o status do serviço Sentinela via systemctl e avisa o Arquiteto se cair. Ou seja, Vigias dos Vigias: Garante que o Sentinela esteja rodando via systemctl STATUS: Operador Invisível - Nível 1.*
