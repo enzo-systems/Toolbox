@@ -1,23 +1,10 @@
-
-### 🚀 Tecnologias Utilizadas
-- **Linguagem:** Python 3.x / Bash
-- **OS:** Linux (Fedora / Debian / Ubuntu)
-- **Libs Principais:**
-    - `requests`: Integração com APIs e requisições HTTP.
-    - `BeautifulSoup4`: Extração de dados de HTML (Web Scraping).
-    - `Pillow (PIL)`: Processamento e manipulação de imagens (Nível 3).
-    - `pyOpenSSL`: Auditoria e gestão de certificados SSL.
-    - `logging`: Sistema de rastreabilidade e histórico de eventos.
-    - `socket`: Verificações de baixo nível de conectividade.
-    - `csv/json`: Persistência de dados estruturados.
-- **Conceitos:** Web Scraping, Image Processing, Daemon Processes, Logging, API REST, Persistência de Dados.
-
----
-# 🛠️ Toolbox de Automação
+# 🛠️ ToolBox - Laboratório de Automação
 
 ### 📂 Estrutura do Projeto
-Coleção de scripts e ferramentas de automação desenvolvidas em Python, com foco em ambiente Linux (Fedora).   
-Este repositório serve como laboratório pessoal para testes de Web Scraping, Processamento de Imagens, Manipulação de Áudio, Segurança de Redes e Processos em Background (Daemons). 
+Coleção de scripts e ferramentas de automação desenvolvidas em Python, com foco em ambiente Linux (Fedora/Debian).   
+Este repositório serve como laboratório pessoal para testes de Web Scraping, Processamento de Imagens, Manipulação de Áudio, Segurança de Redes e Processos em Background (Daemons).
+
+---
 
 ### 🤖 /Robos
 Agentes autônomos e scripts de monitoramento/extração de dados (Nível 2).
@@ -33,6 +20,31 @@ Agentes autônomos e scripts de monitoramento/extração de dados (Nível 2).
 - **[teste_robo.py](./Robos/teste_robo.py)**: Last Config (2026-01-07) | *Docstring - ROBÔ: Web Scraper FUNÇÃO: acessa todas as informações de sites específicos. STATUS: Ativo e funcional - Nível 2*
 - **[watchdog_sentinela.py](./Robos/watchdog_sentinela.py)**: Last Config (2026-01-07) | *Docstring - ROBÔ: SENTINELA FUNÇÃO: Vigia o status do serviço Sentinela via systemctl e avisa o Arquiteto se cair. Ou seja, Vigias dos Vigias: Garante que o Sentinela esteja rodando via systemctl STATUS: Operador Invisível - Nível 1.*
 
+### 📂 /Scripts
+Utilitários de Automação de Infraestrutura e Manutenção de Sistema (Nível 1).
+
+- **[backup_toolbox.sh](./Scripts/backup_toolbox.sh)**: Last Config (2026-01-07) | *FUNÇÃO: Automação de Infraestrutura - Backup incremental do repositório ToolBox.*
+
+### ⚙️ /Config
+Gestor de Parâmetros, Variáveis de Ambiente e Definições Globais (Nível 1).
+
+- *Pasta estruturada.*
+
+### 🐳 /Docker
+Orquestrador de Containers e Ambientes Isolados (Nível 1).
+
+- *Pasta estruturada.*
+
+### 📚 /Docs
+Repositório de Documentação Técnica e Manuais do Projeto.
+
+- *Pasta estruturada.*
+
+### 📝 /Logs
+Registro de Atividades, Históricos e Depuração de Processos.
+
+- *Pasta estruturada.*
+
 ### 🖼️ /Imagens
 Módulos de Processamento Visual e Manipulação de Imagens (Nível 3).
 
@@ -43,36 +55,16 @@ Módulos de Processamento de Áudio e Síntese Vocal.
 
 - **[robo_enzo.py](./CloneVoz/robo_enzo.py)**: Last commit (2026-01-05) | *ROBÔ: MULTIMÍDIA FUNÇÃO: Transforma um roteiro escrito em áudio baseado na voz sintética do roteirista. STATUS: Testando integração com APIs externas.*
 
-### 📂 /Scripts
-Utilitários de Automação de Infraestrutura e Manutenção de Sistema (Nível 1).
-
-- **[backup_toolbox.sh](./Scripts/backup_toolbox.sh)**: Last Config (2026-01-07) | *FUNÇÃO: Automação de Infraestrutura - Backup incremental do repositório ToolBox.*
-
-### ⚙️ /Config
-Gestor de Parâmetros, Variáveis de Ambiente e Definições Globais (Nível 1).
-
-- *Pasta organizada (aguardando módulos).*
-
-### 🐳 /Docker
-Orquestrador de Containers e Ambientes Isolados (Nível 1).
-
-- *Pasta organizada (aguardando módulos).*
-
-### 📚 /Docs
-Repositório de Documentação Técnica e Manuais do Projeto.
-
-- *Pasta organizada (aguardando módulos).*
-
-### 📝 /Logs
-Registro de Atividades, Históricos e Depuração de Processos.
-
-- *Pasta organizada (aguardando módulos).*
-
-### 🚀 /Tecnologias
-- **Linguagem:** Python 3.x
-- **OS:** Linux (Fedora/Debian)
-- **Libs:** `requests`, `BeautifulSoup`, `Pillow` (PIL), `OpenSSL`, `logging`, `socket`
-- **Conceitos:** Web Scraping, Image Processing, Daemon Processes, Logging.
-
 ---
-*Mantido por [Enzo Systems](https://github.com/enzo-systems)*
+### 🛠️ Stack Tecnológico
+- **Linguagem:** Python 3.x / Bash
+- **OS:** Linux (Fedora / Debian / Ubuntu)
+- **Libs Principais:**
+    - `requests`: Integração com APIs e requisições HTTP.
+    - `BeautifulSoup4`: Extração de dados de HTML (Web Scraping).
+    - `Pillow (PIL)`: Processamento e manipulação de imagens (Nível 3).
+    - `pyOpenSSL`: Auditoria e gestão de certificados SSL.
+    - `logging`: Sistema de rastreabilidade e histórico de eventos.
+    - `socket`: Verificações de baixo nível de conectividade.
+    - `csv/json`: Persistência de dados estruturados.
+- **Conceitos:** Web Scraping, Image Processing, Daemon Processes, Logging, API REST, Persistência de Dados.

@@ -3,4 +3,4 @@
 > Repositório de Documentação Técnica e Manuais do Projeto.
 
 ## 📜 Arquivos
-- *Pasta organizada (aguardando módulos).*
+- *Pasta estruturada.*
