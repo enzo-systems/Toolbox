@@ -1,7 +1,7 @@
 #!/bin/bash
-# FUNÇÃO: Automação de Infraestrutura - Backup incremental do repositório ToolBox.
-# TIPO: Utilitário de Sistema (Nível 1).
-# STATUS: Operacional via Crontab.
+# NÍVEL 1: Automação de Infraestrutura
+# FUNÇÃO: Realiza o backup incremental e rotativo do repositório ToolBox.
+# CONCEITOS: Shell Scripting, I/O de arquivos, Cron.
 
 # 1. TRAVAS DE SEGURANÇA 
 # set -e: Aborta em erro.

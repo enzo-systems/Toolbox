@@ -1,7 +1,9 @@
+#!/usr/bin/env python3
+# --- DOCSTRINGS ---
 """
-ROBÔ: MULTIMÍDIA
-FUNÇÃO: Processamento automatizado Redimensionamento de Foto).
-STATUS: Testando integração com APIs externas.
+NÍVEL 3: Processador de Visão Computacional
+FUNÇÃO: Análise, redimensionamento e extração de metadados de arquivos de imagem.
+CONCEITOS: Pillow, Filtros de Imagem, Manipulação de Matrizes.
 """
 import sys
 from PIL import Image, ImageOps, ImageDraw

@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
+# --- DOCSTRINGS ---
 """
-Docstring -
-ROBÔ: SSL HUNTER
-FUNÇÃO: Faz auditoria de segurança em sites específicos.
-Ou seja, Auditor de Segurança: Checa certificados SSL de sites externos.
-STATUS: Ativo e funcional - Nível 2 
+NÍVEL 2: Auditor de Criptografia e Redes
+FUNÇÃO: Varredura e validação de certificados SSL/TLS em domínios externos. Este bot trata com segurança e rede
+CONCEITOS: pyOpenSSL, Protocolos de Segurança, Diagnóstico de Rede.
 """
 # --- SSL Hunter: Auditoria de Segurança ---
 import ssl

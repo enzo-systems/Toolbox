@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
+# --- DOCSTRINGS ---
 """
-Docstring -
-ROBÔ: SENTINELA
-FUNÇÃO: Vigia o status do serviço Sentinela via systemctl e avisa o Arquiteto se cair.
-Ou seja, Vigias dos Vigias: Garante que o Sentinela esteja rodando via systemctl
-STATUS: Operador Invisível - Nível 1. 
+NÍVEL 1: Supervisor de Processos (Watchdog)
+FUNÇÃO: Garante a persistência e reinicialização automática dos agentes do sistema. Este bot trata com Infraestrutura pura.
+CONCEITOS: Monitoramento de Processos, Resiliência, Systemd.
 """
 
 import subprocess

@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
+# --- DOCSTRINGS ---
 """
-Docstring -
-ROBÔ: GURU
-FUNÇÃO: Analisa logs e fornece diagnósticos preditivos sobre o status do sistema.
-Ou seja, Diagnóstico: Analisador de logs do sistema (Alpha).
-STATUS: Em desenvolvimento / Alpha - Nível 1  
+NÍVEL 2: Agente 
+FUNÇÃO: Crawler especializado em monitoramento de portais de emprego.
+CONCEITOS: 
 """
 
 import requests

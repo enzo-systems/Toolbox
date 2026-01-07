@@ -1,5 +1,5 @@
 """
-FUNÇÃO: Gestor de Ambiente - Centraliza variáveis e caminhos globais da ToolBox.
-TIPO: Configuração (Nível 1).
-STATUS: Ativo.
+NÍVEL 1: Gestor de Ambiente
+FUNÇÃO: Centraliza chaves de API, caminhos de pastas e constantes globais.
+CONCEITOS: Variáveis de Ambiente, Configuração Centralizada.
 """

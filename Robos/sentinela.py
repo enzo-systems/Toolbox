@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
+# --- DOCSTRINGS ---
 """
-Docstring -
-ROBÔ: SENTINELA
-FUNÇÃO: Monitora a conexão de rede a cada 60 segundos e evita que o log cresça demais.
-Ou seja, Zelador de Infra: Monitora rede e rotaciona logs para não encher o disco.
-STATUS: Operacional com rotação de logs - Nivel 1. 
+NÍVEL 1: Agente de Monitoramento de Infraestrutura
+FUNÇÃO: Vigia a integridade do sistema, gerencia conectividade e rotatividade de logs. Este bot é a base, o vigia do sistema
+CONCEITOS: I/O de Sistema, Gestão de Logs, Daemonize.
 """
 
 import time

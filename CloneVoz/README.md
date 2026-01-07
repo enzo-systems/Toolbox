@@ -3,4 +3,4 @@
 > Módulos de Processamento de Áudio e Síntese Vocal.
 
 ## 📜 Arquivos
-- **[robo_enzo.py](./robo_enzo.py)**: Last commit (2026-01-05) | *ROBÔ: MULTIMÍDIA FUNÇÃO: Transforma um roteiro escrito em áudio baseado na voz sintética do roteirista. STATUS: Testando integração com APIs externas.*
+- **[voice_synthesizer.py](./voice_synthesizer.py)**: Aguardando commit | *NÍVEL 4: Sintetizador de Voz e Áudio FUNÇÃO: Processamento de áudio e clonagem vocal para interfaces homem-máquina. CONCEITOS: Processamento de Sinal Digital, Síntese de Voz.*

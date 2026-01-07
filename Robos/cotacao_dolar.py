@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
+# --- DOCSTRINGS ---
 """
-Docstring -
-ROBÔ: SENTINELA FINANCEIRO
-FUNÇÃO: Captura cotação do dólar via API e mantém histórico em CSV.
-Ou seja, Integrador de API: Captura dados financeiros profissionais e gera histórico.
-STATUS: Operacional - Nível 2. 
+NÍVEL 2: Agente Financeiro Autônomo
+FUNÇÃO: Captura cotações em tempo real via API e gera séries históricas estruturadas. Este bot trata Dados e APIs
+CONCEITOS: Integração de APIs REST, Persistência CSV, Séries Temporais.
 """
 
 import requests

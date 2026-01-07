@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
 """
-Docstring -
-ROBÔ: Web Scraping
-FUNÇÃO: Procura informações específicas em sites específicos.
-Ou seja, Coletor de Dados: Raspagem de notícias.
-STATUS: Ativo e funcional - Nível 2
+NÍVEL 2: Agente de Extração de Dados
+FUNÇÃO: Coleta notícias de fontes globais via Web Scraping.
+CONCEITOS: BeautifulSoup, requests, persistência em JSON.
 """
 import requests
 from bs4 import BeautifulSoup

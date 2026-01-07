@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# --- DOCSTRINGS ---
 """
 ROBÔ: ARQUITETO DE DOCS (V2.5 - Full Auto)
 FUNÇÃO: Geração integral do ecossistema de documentação (Raiz + Subpastas).
@@ -25,7 +26,7 @@ Este repositório é um ecossistema de automação modular desenvolvido para amb
 
 # --- 2. DEFINIÇÕES TÉCNICAS ---
 DEFINICOES = {
-    "Robos": "Agentes autônomos e scripts de monitoramento/extração de dados (Nível 2).",
+    "Robos": "Unidade de Agentes Autônomos especializados por nível de complexidade.",
     "Scripts": "Utilitários de Automação de Infraestrutura e Manutenção de Sistema (Nível 1).",
     "Config": "Gestor de Parâmetros, Variáveis de Ambiente e Definições Globais (Nível 1).",
     "Docker": "Orquestrador de Containers e Ambientes Isolados (Nível 1).",

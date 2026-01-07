@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
+# --- DOCSTRINGS ---
 """
-DDocstring -
-ROBÔ: SENTINELA
-FUNÇÃO: Navega na Internet como um Agent.
-Ou seja, Agente Navegador: Navega na web como um agente autônomo.
-STATUS: Operacional com rotação de logs - Nível 2. 
+NÍVEL 2: Agente 
+FUNÇÃO: Crawler especializado em monitoramento de portais de emprego.
+CONCEITOS: Agente de integridade de serviços web e tempo de resposta.
 """
 import requests
 import logging

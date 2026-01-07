@@ -1,7 +1,9 @@
+#!/usr/bin/env python3
+# --- DOCSTRINGS ---
 """
-ROBÔ: MULTIMÍDIA
-FUNÇÃO: Transforma um roteiro escrito em áudio baseado na voz sintética do roteirista.
-STATUS: Testando integração com APIs externas.
+NÍVEL 4: Sintetizador de Voz e Áudio
+FUNÇÃO: Processamento de áudio e clonagem vocal para interfaces homem-máquina.
+CONCEITOS: Processamento de Sinal Digital, Síntese de Voz.
 """
 
 import torch

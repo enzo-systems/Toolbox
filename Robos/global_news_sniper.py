@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
+# --- DOCSTRINGS ---
 """
-Docstring -
-ROBÔ: Web Scraping
-FUNÇÃO: Procura informações específicas em toda internet.
-Ou seja, Coletor de Dados: Raspagem de notícias.
-STATUS: Ativo e funcional - Nível 2 
+NÍVEL 2: Agente 
+FUNÇÃO: Coletor internacional de notícias com suporte a múltiplos idiomas.
+CONCEITOS: 
 """
 
 import requests

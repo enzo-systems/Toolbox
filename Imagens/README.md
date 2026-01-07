@@ -3,4 +3,4 @@
 > Módulos de Processamento Visual e Manipulação de Imagens (Nível 3).
 
 ## 📜 Arquivos
-- **[corta_foto.py](./corta_foto.py)**: Last commit (2026-01-05) | *ROBÔ: MULTIMÍDIA FUNÇÃO: Processamento automatizado Redimensionamento de Foto). STATUS: Testando integração com APIs externas.*
+- **[image_processor.py](./image_processor.py)**: Aguardando commit | *NÍVEL 3: Processador de Visão Computacional FUNÇÃO: Análise, redimensionamento e extração de metadados de arquivos de imagem. CONCEITOS: Pillow, Filtros de Imagem, Manipulação de Matrizes.*
