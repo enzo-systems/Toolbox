@@ -21,17 +21,18 @@ Unidade de Agentes Autônomos especializados por nível de complexidade.
 - **[ssl_hunter.py](./Robos/ssl_hunter.py)**: Last Commit (2026-01-07) | *NÍVEL 2: Auditor de Criptografia e Redes FUNÇÃO: Varredura e validação de certificados SSL/TLS em domínios externos. Este bot trata com segurança e rede CONCEITOS: pyOpenSSL, Protocolos de Segurança, Diagnóstico de Rede.*
 - **[system_expert.py](./Robos/system_expert.py)**: Last Commit (2026-01-07) | *NÍVEL 1: Agente de Diagnóstico de Infraestrutura FUNÇÃO: Analisa logs do Kernel e métricas do sistema operacional Linux. CONCEITOS: Shell Integration, Log Parsing, Administração de Sistemas.*
 - **[watchdog_sentinela.py](./Robos/watchdog_sentinela.py)**: Last Commit (2026-01-07) | *NÍVEL 1: Supervisor de Processos (Watchdog) FUNÇÃO: Garante a persistência e reinicialização automática dos agentes do sistema. Este bot trata com Infraestrutura pura. CONCEITOS: Monitoramento de Processos, Resiliência, Systemd.*
-- **[web_monitor.py](./Robos/web_monitor.py)**: Last Commit (2026-01-07) | *NÍVEL 2: Agente de Integridade de Redes FUNÇÃO: Monitora disponibilidade e latência de serviços web críticos. CONCEITOS: Socket Programming, HTTP Status Monitoring, Tempo de Resposta.*
+- **[web_monitor.py](./Robos/web_monitor.py)**: . (2026-01-07) | *NÍVEL 2: Agente de Integridade de Redes FUNÇÃO: Monitora disponibilidade e latência de serviços web críticos. CONCEITOS: Socket Programming, HTTP Status Monitoring, Tempo de Resposta.*
 
 ### 📂 /Scripts
 Utilitários de Automação de Infraestrutura e Manutenção de Sistema (Nível 1).
 
 - **[backup_toolbox.sh](./Scripts/backup_toolbox.sh)**: Last Commit (2026-01-07) | *NÍVEL 1: Automação de Infraestrutura*
+- **[gerar_docs.py](./Scripts/gerar_docs.py)**: Aguardando commit | *ROBÔ: ARQUITETO DE DOCS (V2.5 - Full Auto) FUNÇÃO: Geração integral do ecossistema de documentação (Raiz + Subpastas). STATUS: Operacional - Nível 1*
 
 ### ⚙️ /Config
 Gestor de Parâmetros, Caminhos (Settings) e Variáveis de Ambiente (Nível 1).
 
-- **[settings.py](./Config/settings.py)**: Last Commit (2026-01-07) | *NÍVEL 1: Gestor de Ambiente e Caminhos FUNÇÃO: Centraliza a inteligência de diretórios e parâmetros globais do sistema. CONCEITOS: Abstração de Caminhos, Configuração Centralizada.*
+- **[settings.py](./Config/settings.py)**: . (2026-01-07) | *NÍVEL 1: Gestor de Ambiente e Caminhos FUNÇÃO: Centraliza a inteligência de diretórios e parâmetros globais do sistema. CONCEITOS: Abstração de Caminhos, Configuração Centralizada.*
 
 ### 🐳 /Docker
 Orquestrador de Containers e Ambientes Isolados (Nível 1).
@@ -61,9 +62,9 @@ Módulos de Processamento de Áudio e Síntese Vocal.
 ### 📊 /Data
 Repositório de Dados Estruturados (JSON/CSV) gerados pelos robôs (Persistência).
 
-- **[memoria_world.json](./Data/memoria_world.json)**: Last Commit (2026-01-07)
-- **[vagas_encontradas.json](./Data/vagas_encontradas.json)**: Last Commit (2026-01-07)
-- **[web_monitor_results.json](./Data/web_monitor_results.json)**: Aguardando commit
+- **[memoria_world.json](./Data/memoria_world.json)**: . (2026-01-07)
+- **[vagas_encontradas.json](./Data/vagas_encontradas.json)**: . (2026-01-07)
+- **[web_monitor_results.json](./Data/web_monitor_results.json)**: . (2026-01-07)
 
 ---
 ### 🛠️ Stack Tecnológico
