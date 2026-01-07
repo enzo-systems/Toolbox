@@ -48,24 +48,25 @@ def get_git_info(filepath):
     except: return "Erro Git"
 
 def gerar_lista_arquivos(pasta):
-    """Gera lista Markdown para QUALQUER pasta, identificando o nível e tipo."""
     linhas = []
     if os.path.exists(pasta):
-        # Agora aceitamos .py, .sh e até arquivos de config como .yml ou .json
-        extensoes = ('.py', '.sh', '.json', '.yml', '.yaml')
+        # Filtramos arquivos que realmente importam para a documentação
+        extensoes = ('.py', '.sh', '.yml', '.json')
         arquivos = sorted([f for f in os.listdir(pasta) if f.endswith(extensoes) and f != 'README.md'])
         
         for arq in arquivos:
             caminho = os.path.join(pasta, arq)
-            git_info = get_git_info(caminho)
-            descricao = extrair_docstring(caminho)
-            
-            # Identificação Automática de Tipo
-            tipo = "🐍 Python" if arq.endswith('.py') else "🐚 Shell" if arq.endswith('.sh') else "⚙️ Config"
-            
-            linhas.append(f"- **[{arq}](./{pasta}/{arq})** ({tipo}): {git_info}{descricao}")
+            if os.path.exists(caminho):
+                git_info = get_git_info(caminho)
+                descricao = extrair_docstring(caminho)
+                
+                # Se for um .gitkeep ou arquivo sem descrição, colocamos um padrão
+                if not descricao and arq == '.gitkeep':
+                    continue # Ignora o .gitkeep na listagem visual
+                
+                linhas.append(f"- **[{arq}](./{pasta}/{arq})**: {git_info}{descricao}")
     
-    return linhas if linhas else ["- *Pasta organizada (aguardando novos módulos).*"]
+    return linhas if linhas else ["- *Pasta estruturada (aguardando arquivos de sistema).*"]
 
 def main():
     if not os.path.exists('README.md'): return

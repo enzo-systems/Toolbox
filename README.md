@@ -5,37 +5,37 @@ Coleção de scripts e ferramentas de automação desenvolvidas em Python, com f
 Este repositório serve como laboratório pessoal para testes de Web Scraping, Processamento de Imagens, Manipulação de Áudio, Segurança de Redes e Processos em Background (Daemons). 
 
 ### 🤖 /Robos
-- **[cotacao_dolar.py](./Robos/cotacao_dolar.py)** (🐍 Python): Nível 2 (2026-01-07) | *Docstring - ROBÔ: SENTINELA FINANCEIRO FUNÇÃO: Captura cotação do dólar via API e mantém histórico em CSV. Ou seja, Integrador de API: Captura dados financeiros profissionais e gera histórico. STATUS: Operacional - Nível 2.*
-- **[guru_linux.py](./Robos/guru_linux.py)** (🐍 Python): Nível 1 (2026-01-07) | *Docstring - ROBÔ: GURU FUNÇÃO: Analisa logs e fornece diagnósticos preditivos sobre o status do sistema. Ou seja, Diagnóstico: Analisador de logs do sistema (Alpha). STATUS: Em desenvolvimento / Alpha - Nível 1*
-- **[news_sniper.py](./Robos/news_sniper.py)** (🐍 Python): Nível 2 (2026-01-07) | *Docstring - ROBÔ: Web Scraping FUNÇÃO: Procura informações específicas em sites específicos. Ou seja, Coletor de Dados: Raspagem de notícias. STATUS: Ativo e funcional - Nível 2*
-- **[news_sniper_world.py](./Robos/news_sniper_world.py)** (🐍 Python): Nível 2 (2026-01-07) | *Docstring - ROBÔ: Web Scraping FUNÇÃO: Procura informações específicas em toda internet. Ou seja, Coletor de Dados: Raspagem de notícias. STATUS: Ativo e funcional - Nível 2*
-- **[robo_vagas.py](./Robos/robo_vagas.py)** (🐍 Python): Nível 2 (2026-01-07) | *Docstring - ROBÔ: Web Scraper FUNÇÃO: Procura informações vagas de empregos em sites específicos. Ou seja, Coletor de Dados: Busca oportunidades em sites específicos. STATUS: Ativo e funcional - Nível 2*
-- **[sentinela.py](./Robos/sentinela.py)** (🐍 Python): Nível 1 (2026-01-07) | *Docstring - ROBÔ: SENTINELA FUNÇÃO: Monitora a conexão de rede a cada 60 segundos e evita que o log cresça demais. Ou seja, Zelador de Infra: Monitora rede e rotaciona logs para não encher o disco. STATUS: Operacional com rotação de logs - Nivel 1.*
-- **[sentinela_web.py](./Robos/sentinela_web.py)** (🐍 Python): Nível 2 (2026-01-07) | *DDocstring - ROBÔ: SENTINELA FUNÇÃO: Navega na Internet como um Agent. Ou seja, Agente Navegador: Navega na web como um agente autônomo. STATUS: Operacional com rotação de logs - Nível 2.*
-- **[ssl_hunter.py](./Robos/ssl_hunter.py)** (🐍 Python): Nível 2 (2026-01-07) | *Docstring - ROBÔ: SSL HUNTER FUNÇÃO: Faz auditoria de segurança em sites específicos. Ou seja, Auditor de Segurança: Checa certificados SSL de sites externos. STATUS: Ativo e funcional - Nível 2*
-- **[teste_robo.py](./Robos/teste_robo.py)** (🐍 Python): Nível 2 (2026-01-07) | *Docstring - ROBÔ: Web Scraper FUNÇÃO: acessa todas as informações de sites específicos. STATUS: Ativo e funcional - Nível 2*
-- **[watchdog_sentinela.py](./Robos/watchdog_sentinela.py)** (🐍 Python): Nível 1 (2026-01-07) | *Docstring - ROBÔ: SENTINELA FUNÇÃO: Vigia o status do serviço Sentinela via systemctl e avisa o Arquiteto se cair. Ou seja, Vigias dos Vigias: Garante que o Sentinela esteja rodando via systemctl STATUS: Operador Invisível - Nível 1.*
+- **[cotacao_dolar.py](./Robos/cotacao_dolar.py)**: Nível 2 (2026-01-07) | *Docstring - ROBÔ: SENTINELA FINANCEIRO FUNÇÃO: Captura cotação do dólar via API e mantém histórico em CSV. Ou seja, Integrador de API: Captura dados financeiros profissionais e gera histórico. STATUS: Operacional - Nível 2.*
+- **[guru_linux.py](./Robos/guru_linux.py)**: Nível 1 (2026-01-07) | *Docstring - ROBÔ: GURU FUNÇÃO: Analisa logs e fornece diagnósticos preditivos sobre o status do sistema. Ou seja, Diagnóstico: Analisador de logs do sistema (Alpha). STATUS: Em desenvolvimento / Alpha - Nível 1*
+- **[news_sniper.py](./Robos/news_sniper.py)**: Nível 2 (2026-01-07) | *Docstring - ROBÔ: Web Scraping FUNÇÃO: Procura informações específicas em sites específicos. Ou seja, Coletor de Dados: Raspagem de notícias. STATUS: Ativo e funcional - Nível 2*
+- **[news_sniper_world.py](./Robos/news_sniper_world.py)**: Nível 2 (2026-01-07) | *Docstring - ROBÔ: Web Scraping FUNÇÃO: Procura informações específicas em toda internet. Ou seja, Coletor de Dados: Raspagem de notícias. STATUS: Ativo e funcional - Nível 2*
+- **[robo_vagas.py](./Robos/robo_vagas.py)**: Nível 2 (2026-01-07) | *Docstring - ROBÔ: Web Scraper FUNÇÃO: Procura informações vagas de empregos em sites específicos. Ou seja, Coletor de Dados: Busca oportunidades em sites específicos. STATUS: Ativo e funcional - Nível 2*
+- **[sentinela.py](./Robos/sentinela.py)**: Nível 1 (2026-01-07) | *Docstring - ROBÔ: SENTINELA FUNÇÃO: Monitora a conexão de rede a cada 60 segundos e evita que o log cresça demais. Ou seja, Zelador de Infra: Monitora rede e rotaciona logs para não encher o disco. STATUS: Operacional com rotação de logs - Nivel 1.*
+- **[sentinela_web.py](./Robos/sentinela_web.py)**: Nível 2 (2026-01-07) | *DDocstring - ROBÔ: SENTINELA FUNÇÃO: Navega na Internet como um Agent. Ou seja, Agente Navegador: Navega na web como um agente autônomo. STATUS: Operacional com rotação de logs - Nível 2.*
+- **[ssl_hunter.py](./Robos/ssl_hunter.py)**: Nível 2 (2026-01-07) | *Docstring - ROBÔ: SSL HUNTER FUNÇÃO: Faz auditoria de segurança em sites específicos. Ou seja, Auditor de Segurança: Checa certificados SSL de sites externos. STATUS: Ativo e funcional - Nível 2*
+- **[teste_robo.py](./Robos/teste_robo.py)**: Nível 2 (2026-01-07) | *Docstring - ROBÔ: Web Scraper FUNÇÃO: acessa todas as informações de sites específicos. STATUS: Ativo e funcional - Nível 2*
+- **[watchdog_sentinela.py](./Robos/watchdog_sentinela.py)**: Nível 1 (2026-01-07) | *Docstring - ROBÔ: SENTINELA FUNÇÃO: Vigia o status do serviço Sentinela via systemctl e avisa o Arquiteto se cair. Ou seja, Vigias dos Vigias: Garante que o Sentinela esteja rodando via systemctl STATUS: Operador Invisível - Nível 1.*
 
 ### 🖼️ /Imagens
-- **[corta_foto.py](./Imagens/corta_foto.py)** (🐍 Python): Last commit (2026-01-05) | *ROBÔ: MULTIMÍDIA FUNÇÃO: Processamento automatizado Redimensionamento de Foto). STATUS: Testando integração com APIs externas.*
+- **[corta_foto.py](./Imagens/corta_foto.py)**: Last commit (2026-01-05) | *ROBÔ: MULTIMÍDIA FUNÇÃO: Processamento automatizado Redimensionamento de Foto). STATUS: Testando integração com APIs externas.*
 
 ### 🎙️ /CloneVoz
-- **[robo_enzo.py](./CloneVoz/robo_enzo.py)** (🐍 Python): Last commit (2026-01-05) | *ROBÔ: MULTIMÍDIA FUNÇÃO: Transforma um roteiro escrito em áudio baseado na voz sintética do roteirista. STATUS: Testando integração com APIs externas.*
+- **[robo_enzo.py](./CloneVoz/robo_enzo.py)**: Last commit (2026-01-05) | *ROBÔ: MULTIMÍDIA FUNÇÃO: Transforma um roteiro escrito em áudio baseado na voz sintética do roteirista. STATUS: Testando integração com APIs externas.*
 
 ### 📂 /Scripts
-- **[backup_toolbox.sh](./Scripts/backup_toolbox.sh)** (🐚 Shell): message commit (2026-01-06) | *ARQUITETURA AUTÔNOMA - NÍVEL 1*
+- **[backup_toolbox.sh](./Scripts/backup_toolbox.sh)**: message commit (2026-01-06) | *FUNÇÃO: Automação de Infraestrutura - Backup incremental do repositório ToolBox.*
 
 ### ⚙️ /Config
-- *Pasta organizada (aguardando novos módulos).*
+- *Pasta estruturada (aguardando arquivos de sistema).*
 
 ### 🐳 /Docker
-- *Pasta organizada (aguardando novos módulos).*
+- *Pasta estruturada (aguardando arquivos de sistema).*
 
 ### 📚 /Docs
-- *Pasta organizada (aguardando novos módulos).*
+- *Pasta estruturada (aguardando arquivos de sistema).*
 
 ### 📝 /Logs
-- *Pasta organizada (aguardando novos módulos).*
+- *Pasta estruturada (aguardando arquivos de sistema).*
 
 ### 🚀 /Tecnologias
 - **Linguagem:** Python 3.x

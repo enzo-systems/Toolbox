@@ -1,1 +1,5 @@
- 
+"""
+FUNÇÃO: Gestor de Ambiente - Centraliza variáveis e caminhos globais da ToolBox.
+TIPO: Configuração (Nível 1).
+STATUS: Ativo.
+"""
