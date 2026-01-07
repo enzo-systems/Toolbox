@@ -1,9 +1,9 @@
 """
-Docstring-------------------------------------------------
+Docstring -
 ROBÔ: Web Scraping
 FUNÇÃO: Procura informações específicas em toda internet.
-        Ou seja, Coletor de Dados: Raspagem de notícias.
-STATUS: Ativo e funcional - Nível 2
+Ou seja, Coletor de Dados: Raspagem de notícias.
+STATUS: Ativo e funcional - Nível 2 
 """
 
 import requests
