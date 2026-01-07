@@ -19,7 +19,7 @@ Unidade de Agentes Autônomos especializados por nível de complexidade.
 - **[news_sniper.py](./Robos/news_sniper.py)**: Last Commit (2026-01-07) | *NÍVEL 2: Agente de Extração de Dados FUNÇÃO: Coleta notícias de fontes globais via Web Scraping. CONCEITOS: BeautifulSoup, requests, persistência em JSON.*
 - **[sentinela.py](./Robos/sentinela.py)**: Last Commit (2026-01-07) | *NÍVEL 1: Agente de Monitoramento de Infraestrutura FUNÇÃO: Vigia a integridade do sistema, gerencia conectividade e rotatividade de logs. Este bot é a base, o vigia do sistema CONCEITOS: I/O de Sistema, Gestão de Logs, Daemonize.*
 - **[ssl_hunter.py](./Robos/ssl_hunter.py)**: Last Commit (2026-01-07) | *NÍVEL 2: Auditor de Criptografia e Redes FUNÇÃO: Varredura e validação de certificados SSL/TLS em domínios externos. Este bot trata com segurança e rede CONCEITOS: pyOpenSSL, Protocolos de Segurança, Diagnóstico de Rede.*
-- **[system_expert.py](./Robos/system_expert.py)**: Last Commit (2026-01-07) | *NÍVEL 1: Agente de Diagnóstico de Infraestrutura FUNÇÃO: Analisa comandos Linux e gera documentação formatada para comunidades. CONCEITOS: Shell Integration, Log Parsing, Integração com API TLDR.*
+- **[system_expert.py](./Robos/system_expert.py)**: (2026-01-07) | *NÍVEL 1: Agente de Diagnóstico de Infraestrutura FUNÇÃO: Analisa comandos Linux e gera documentação formatada para comunidades. CONCEITOS: Shell Integration, Log Parsing, Integração com API TLDR.*
 - **[watchdog_sentinela.py](./Robos/watchdog_sentinela.py)**: Last Commit (2026-01-07) | *NÍVEL 1: Supervisor de Processos (Watchdog) FUNÇÃO: Garante a persistência e reinicialização automática dos agentes do sistema. Este bot trata com Infraestrutura pura. CONCEITOS: Monitoramento de Processos, Resiliência, Systemd.*
 - **[web_monitor.py](./Robos/web_monitor.py)**: . (2026-01-07) | *NÍVEL 2: Agente de Integridade de Redes FUNÇÃO: Monitora disponibilidade e latência de serviços web críticos. CONCEITOS: Socket Programming, HTTP Status Monitoring, Tempo de Resposta.*
 
@@ -64,7 +64,7 @@ Repositório de Dados Estruturados (JSON/CSV) gerados pelos robôs (Persistênci
 
 - **[memoria_world.json](./Data/memoria_world.json)**: . (2026-01-07)
 - **[vagas_encontradas.json](./Data/vagas_encontradas.json)**: . (2026-01-07)
-- **[web_monitor_results.json](./Data/web_monitor_results.json)**: . (2026-01-07)
+- **[web_monitor_results.json](./Data/web_monitor_results.json)**: (2026-01-07)
 
 ---
 ### 🛠️ Stack Tecnológico
