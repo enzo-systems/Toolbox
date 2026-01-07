@@ -1,6 +1,6 @@
 """
 ROBÔ: SENTINELA
-FUNÇÃO: Navega na Internet como um agent.
+FUNÇÃO: Navega na Internet como um Agent.
 STATUS: Operacional com rotação de logs.
 """
 #!/usr/bin/env python3

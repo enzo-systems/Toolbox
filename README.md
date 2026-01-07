@@ -5,6 +5,7 @@ Coleção de scripts e ferramentas de automação desenvolvidas em Python, com f
 Este repositório serve como laboratório pessoal para testes de Web Scraping, Processamento de Imagens, Manipulação de Áudio, Segurança de Redes e Processos em Background (Daemons). 
 
 ### 🤖 /Robos
+- **[cotacao_dolar.py](./Robos/cotacao_dolar.py)**: Novo arquivo
 - **[guru_linux.py](./Robos/guru_linux.py)**: Last commit (2026-01-05) | *ROBÔ: GURU FUNÇÃO: Analisa logs e fornece diagnósticos preditivos sobre o status do sistema. STATUS: Em desenvolvimento / Alpha.*
 - **[memoria_world.json](./Robos/memoria_world.json)**: Last commit message (2026-01-05)
 - **[news_sniper.py](./Robos/news_sniper.py)**: Last commit (2026-01-05) | *ROBÔ: SNIPER FUNÇÃO: Procura informações específicas em sites específicos. STATUS: Ativo e funcional.*
