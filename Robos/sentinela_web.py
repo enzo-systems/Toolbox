@@ -1,9 +1,9 @@
 """
-Docstring-------------------------------------------------
+DDocstring -
 ROBÔ: SENTINELA
 FUNÇÃO: Navega na Internet como um Agent.
-        Ou seja, Agente Navegador: Navega na web como um agente autônomo.
-STATUS: Operacional com rotação de logs - Nível 2.
+Ou seja, Agente Navegador: Navega na web como um agente autônomo.
+STATUS: Operacional com rotação de logs - Nível 2. 
 """
 #!/usr/bin/env python3
 import requests
