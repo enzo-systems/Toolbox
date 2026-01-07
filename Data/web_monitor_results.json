@@ -6,5 +6,21 @@
         "latencia_ms": 807.23,
         "bytes": 330582,
         "sucesso": true
+    },
+    {
+        "timestamp": "2026-01-07 16:00:29",
+        "url": "https://pt.wikipedia.org/wiki/Python",
+        "status": 200,
+        "latencia_ms": 234.7,
+        "bytes": 330582,
+        "sucesso": true
+    },
+    {
+        "timestamp": "2026-01-07 16:01:00",
+        "url": "https://pt.wikipedia.org/wiki/Python",
+        "status": 200,
+        "latencia_ms": 181.64,
+        "bytes": 330582,
+        "sucesso": true
     }
 ]

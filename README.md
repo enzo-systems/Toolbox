@@ -19,7 +19,7 @@ Unidade de Agentes Autônomos especializados por nível de complexidade.
 - **[news_sniper.py](./Robos/news_sniper.py)**: Last Commit (2026-01-07) | *NÍVEL 2: Agente de Extração de Dados FUNÇÃO: Coleta notícias de fontes globais via Web Scraping. CONCEITOS: BeautifulSoup, requests, persistência em JSON.*
 - **[sentinela.py](./Robos/sentinela.py)**: Last Commit (2026-01-07) | *NÍVEL 1: Agente de Monitoramento de Infraestrutura FUNÇÃO: Vigia a integridade do sistema, gerencia conectividade e rotatividade de logs. Este bot é a base, o vigia do sistema CONCEITOS: I/O de Sistema, Gestão de Logs, Daemonize.*
 - **[ssl_hunter.py](./Robos/ssl_hunter.py)**: Last Commit (2026-01-07) | *NÍVEL 2: Auditor de Criptografia e Redes FUNÇÃO: Varredura e validação de certificados SSL/TLS em domínios externos. Este bot trata com segurança e rede CONCEITOS: pyOpenSSL, Protocolos de Segurança, Diagnóstico de Rede.*
-- **[system_expert.py](./Robos/system_expert.py)**: Last Commit (2026-01-07) | *NÍVEL 1: Agente de Diagnóstico de Infraestrutura FUNÇÃO: Analisa logs do Kernel e métricas do sistema operacional Linux. CONCEITOS: Shell Integration, Log Parsing, Administração de Sistemas.*
+- **[system_expert.py](./Robos/system_expert.py)**: Last Commit (2026-01-07) | *NÍVEL 1: Agente de Diagnóstico de Infraestrutura FUNÇÃO: Analisa comandos Linux e gera documentação formatada para comunidades. CONCEITOS: Shell Integration, Log Parsing, Integração com API TLDR.*
 - **[watchdog_sentinela.py](./Robos/watchdog_sentinela.py)**: Last Commit (2026-01-07) | *NÍVEL 1: Supervisor de Processos (Watchdog) FUNÇÃO: Garante a persistência e reinicialização automática dos agentes do sistema. Este bot trata com Infraestrutura pura. CONCEITOS: Monitoramento de Processos, Resiliência, Systemd.*
 - **[web_monitor.py](./Robos/web_monitor.py)**: . (2026-01-07) | *NÍVEL 2: Agente de Integridade de Redes FUNÇÃO: Monitora disponibilidade e latência de serviços web críticos. CONCEITOS: Socket Programming, HTTP Status Monitoring, Tempo de Resposta.*
 
@@ -27,7 +27,7 @@ Unidade de Agentes Autônomos especializados por nível de complexidade.
 Utilitários de Automação de Infraestrutura e Manutenção de Sistema (Nível 1).
 
 - **[backup_toolbox.sh](./Scripts/backup_toolbox.sh)**: Last Commit (2026-01-07) | *NÍVEL 1: Automação de Infraestrutura*
-- **[gerar_docs.py](./Scripts/gerar_docs.py)**: Aguardando commit | *ROBÔ: ARQUITETO DE DOCS (V2.5 - Full Auto) FUNÇÃO: Geração integral do ecossistema de documentação (Raiz + Subpastas). STATUS: Operacional - Nível 1*
+- **[gerar_docs.py](./Scripts/gerar_docs.py)**: (2026-01-07) | *ROBÔ: ARQUITETO DE DOCS (V2.5 - Full Auto) FUNÇÃO: Geração integral do ecossistema de documentação (Raiz + Subpastas). STATUS: Operacional - Nível 1*
 
 ### ⚙️ /Config
 Gestor de Parâmetros, Caminhos (Settings) e Variáveis de Ambiente (Nível 1).
