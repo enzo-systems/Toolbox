@@ -1,7 +1,9 @@
 """
-ROBÔ: SNIPER
+Docstring-------------------------------------------------
+ROBÔ: Web Scraping
 FUNÇÃO: Procura informações específicas em toda internet.
-STATUS: Ativo e funcional.
+        Ou seja, Coletor de Dados: Raspagem de notícias.
+STATUS: Ativo e funcional - Nível 2
 """
 
 import requests
@@ -12,7 +14,7 @@ import time
 
 # --- CONFIGURAÇÃO: SNIPER GLOBAL (Google News) ---
 TERMOS_ALVO = ["Inteligência Artificial", "Linux", "Python", "Cibersegurança"]
-ARQUIVO_MEMORIA = "Robos/memoria_world.json" # Memória exclusiva deste robô
+ARQUIVO_MEMORIA = "Logs/memoria_world.json" # Memória exclusiva deste robô
 
 def carregar_memoria():
     if os.path.exists(ARQUIVO_MEMORIA):
