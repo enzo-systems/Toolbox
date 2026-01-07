@@ -1,8 +1,9 @@
 """
+Docstring -
 ROBÔ: SENTINELA
 FUNÇÃO: Vigia o status do serviço Sentinela via systemctl e avisa o Arquiteto se cair.
-        Ou seja, Vigias dos Vigias: Garante que o Sentinela esteja rodando via systemctl
-STATUS: Operador Invisível - Nível 1.
+Ou seja, Vigias dos Vigias: Garante que o Sentinela esteja rodando via systemctl
+STATUS: Operador Invisível - Nível 1. 
 """
 
 import subprocess
