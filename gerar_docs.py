@@ -1,8 +1,7 @@
-
+#!/usr/bin/env python3
 """
-Docstring -
-ROBÔ: ARQUITETO DE DOCS (V2.1 - Clean)
-FUNÇÃO: Padronização total da estrutura e remoção de poluição visual.
+ROBÔ: ARQUITETO DE DOCS (V2.2 - Auditoria Sênior)
+FUNÇÃO: Padronização total da estrutura, sub-readmes e tecnologias.
 STATUS: Ativo e funcional - Nível 1
 """
 
@@ -11,6 +10,21 @@ import re
 import subprocess
 
 # --- Configurações de Identidade Sênior ---
+TECNOLOGIAS = """
+### 🚀 Tecnologias Utilizadas
+- **Linguagem:** Python 3.x / Bash
+- **OS:** Linux (Fedora / Debian / Ubuntu)
+- **Libs Principais:**
+    - `requests`: Integração com APIs e requisições HTTP.
+    - `BeautifulSoup4`: Extração de dados de HTML (Web Scraping).
+    - `Pillow (PIL)`: Processamento e manipulação de imagens (Nível 3).
+    - `pyOpenSSL`: Auditoria e gestão de certificados SSL.
+    - `logging`: Sistema de rastreabilidade e histórico de eventos.
+    - `socket`: Verificações de baixo nível de conectividade.
+    - `csv/json`: Persistência de dados estruturados.
+- **Conceitos:** Web Scraping, Image Processing, Daemon Processes, Logging, API REST, Persistência de Dados.
+"""
+
 DEFINICOES = {
     "Robos": "Agentes autônomos e scripts de monitoramento/extração de dados (Nível 2).",
     "Scripts": "Utilitários de Automação de Infraestrutura e Manutenção de Sistema (Nível 1).",
@@ -64,58 +78,48 @@ def gerar_lista_arquivos(pasta, link_relativo=True):
             caminho_arq = os.path.join(pasta, arq)
             git_info = get_git_info(caminho_arq)
             desc = extrair_docstring(caminho_arq)
-            prefixo = f"./{pasta}/" if not link_relativo else "./"
-            linhas.append(f"- **[{arq}]({prefixo}{arq})**: {git_info}{desc}")
+            prefixo = f"./{pasta}/" if not link_relativo else f"./{pasta}/"
+            # Ajuste de link para o README da raiz
+            if not link_relativo:
+                linhas.append(f"- **[{arq}]({prefixo}{arq})**: {git_info}{desc}")
+            else:
+                linhas.append(f"- **[{arq}](./{arq})**: {git_info}{desc}")
     return linhas if linhas else ["- *Pasta organizada (aguardando módulos).*"]
+
+def atualizar_tecnologias(conteudo):
+    """Garante que a seção de Tecnologias esteja atualizada no README Raiz."""
+    header = "### 🚀 Tecnologias Utilizadas"
+    pattern = re.compile(rf"{re.escape(header)}.*?(?=\n###|\n---|\Z)", re.DOTALL)
+    
+    if header in conteudo:
+        return pattern.sub(TECNOLOGIAS.strip(), conteudo)
+    else:
+        # Se não existir, insere no topo, após o título principal (se houver)
+        return TECNOLOGIAS + "\n---\n" + conteudo
 
 def atualizar_readme_principal():
     if not os.path.exists('README.md'): return
     with open('README.md', 'r', encoding='utf-8') as f:
         conteudo = f.read()
 
+    # Injeção das Tecnologias
+    conteudo = atualizar_tecnologias(conteudo)
+
+    # Injeção dos Módulos
     for pasta, header in MAPA_MODULOS.items():
         if header in conteudo:
             definicao = DEFINICOES.get(pasta, "")
             lista = gerar_lista_arquivos(pasta, link_relativo=False)
             
-            # Monta o bloco: Cabeçalho + Definição + Lista
-            nova_secao = f"{header}\n{definicao}\n" + "\n".join(lista) + "\n"
+            nova_secao = f"{header}\n{definicao}\n\n" + "\n".join(lista) + "\n"
             
-            # Regex para substituir até o próximo cabeçalho ou fim do arquivo
             pattern = re.compile(rf"({re.escape(header)}.*?)(\n###|\n---|\Z)", re.DOTALL)
             conteudo = pattern.sub(rf"{nova_secao}\2", conteudo)
 
     with open('README.md', 'w', encoding='utf-8') as f:
         f.write(conteudo)
-    print("✅ README.md Principal atualizado com definições técnicas.")
-
-# --- Configurações Sênior ---
-TECNOLOGIAS = """
-### 🚀 Tecnologias Utilizadas
-- **Linguagem:** Python 3.x / Bash
-- **OS:** Linux (Fedora / Debian / Ubuntu)
-- **Libs Principais:** - `requests`: Integração com APIs e requisições HTTP.
-    - `BeautifulSoup4`: Extração de dados de HTML (Web Scraping).
-    - `Pillow (PIL)`: Processamento e manipulação de imagens (Nível 3).
-    - `pyOpenSSL`: Auditoria e gestão de certificados SSL.
-    - `logging`: Sistema de rastreabilidade e histórico de eventos.
-    - `socket`: Verificações de baixo nível de conectividade.
-    - `csv/json`: Persistência de dados estruturados.
-- **Conceitos:** Web Scraping, Image Processing, Daemon Processes, Logging, API REST, Persistência de Dados.
-"""
-
-def atualizar_tecnologias(conteudo):
-    """Garante que a seção de Tecnologias esteja atualizada no README Raiz."""
-    header = "### 🚀 Tecnologias Utilizadas"
-    # Busca desde o header até a próxima seção de nível 3 (###) ou o separador (---)
-    pattern = re.compile(rf"{re.escape(header)}.*?(?=\n###|\n---|\Z)", re.DOTALL)
+    print("✅ README.md Principal (Tecnologias + Módulos) atualizado.")
     
-    if header in conteudo:
-        return pattern.sub(TECNOLOGIAS.strip(), conteudo)
-    else:
-        # Se não existir, insere antes dos módulos
-        return TECNOLOGIAS + "\n---\n" + conteudo
-
 def atualizar_readmes_subpastas():
     for pasta in DEFINICOES.keys():
         if os.path.exists(pasta):
