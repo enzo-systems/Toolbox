@@ -2,7 +2,7 @@
 # --- DOCSTRINGS --- 
 """
 NÍVEL 3: Processador de Visão Computacional
-FUNÇÃO: Análise, redimensionamento e extração de metadados de arquivos de imagem.
+FUNÇÃO: Análise, redimensionamento e extração de metadados de imagens.
 CONCEITOS: Pillow, Filtros de Imagem, Manipulação de Matrizes.
 """
 import sys

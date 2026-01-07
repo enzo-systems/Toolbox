@@ -1,10 +1,8 @@
 #!/usr/bin/env python3 
 """
-Docstring -
-ROBÔ: Web Scraper
-FUNÇÃO: Procura informações vagas de empregos em sites específicos.
-Ou seja, Coletor de Dados: Busca oportunidades em sites específicos.
-STATUS: Ativo e funcional - Nível 2 
+NÍVEL 2: Agente de Monitoramento de Mercado
+FUNÇÃO: Rastreia e filtra oportunidades de carreira em portais especializados.
+CONCEITOS: Web Crawling, BeautifulSoup4, Automação de Busca.
 """
 # --- Robo Vagas: Web Scraper ---
 import requests

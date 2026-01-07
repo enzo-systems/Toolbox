@@ -1,9 +1,9 @@
 #!/usr/bin/env python3 
 # --- DOCSTRINGS ---
 """
-NÍVEL 2: Agente 
-FUNÇÃO: Crawler especializado em monitoramento de portais de emprego.
-CONCEITOS: Agente de integridade de serviços web e tempo de resposta.
+NÍVEL 2: Agente de Integridade de Redes
+FUNÇÃO: Monitora disponibilidade e latência de serviços web críticos.
+CONCEITOS: Socket Programming, HTTP Status Monitoring, Tempo de Resposta.
 """
 import requests
 import logging

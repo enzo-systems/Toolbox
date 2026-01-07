@@ -1,54 +1,56 @@
-#!/usr/bin/env python3 
-# --- DOCSTRINGS ---
+#!/usr/bin/env python3
 """
 NÍVEL 2: Agente Financeiro Autônomo
-FUNÇÃO: Captura cotações em tempo real via API e gera séries históricas estruturadas. Este bot trata Dados e APIs
-CONCEITOS: Integração de APIs REST, Persistência CSV, Séries Temporais.
+FUNÇÃO: Captura cotações em tempo real via API e gera séries históricas.
+CONCEITOS: Integração de APIs REST, Configuração Centralizada, Persistência CSV.
 """
 
+import sys
 import requests
-import logging
-import os
 import csv
 from datetime import datetime
+from pathlib import Path
 
-# 1. Configuração de Caminhos e Logs
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-LOG_FILE = os.path.join(BASE_DIR, "Logs", "historico_dolar.csv")
+# --- BOOTSTRAP: LOCALIZA O SETTINGS ---
+# Adiciona a raiz do projeto ao sistema para permitir a importação de Config
+BASE_DIR = Path(__file__).resolve().parent.parent
+if str(BASE_DIR) not in sys.path:
+    sys.path.append(str(BASE_DIR))
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
+try:
+    from Config.settings import CAMBIO_CONFIG
+except ImportError:
+    print("Erro: Não foi possível localizar Config/settings.py")
+    sys.exit(1)
 
-def salvar_no_historico(valor):
-    # Verifica se o arquivo existe para escrever o cabeçalho
-    arquivo_novo = not os.path.exists(LOG_FILE)
+def buscar_cotacao():
+    try:
+        response = requests.get(CAMBIO_CONFIG["url_api"], timeout=10)
+        response.raise_for_status()
+        data = response.json()
+        # A API retorna algo como USDBRL, pegamos o valor de compra (bid)
+        par = list(data.keys())[0]
+        return data[par]['bid']
+    except Exception as e:
+        print(f"Falha na coleta: {e}")
+        return None
+
+def salvar_dados(valor):
+    if not valor: return
     
-    try:
-        with open(LOG_FILE, 'a', newline='', encoding='utf-8') as f:
-            escritor = csv.writer(f)
-            if arquivo_novo:
-                escritor.writerow(["Data/Hora", "Moeda", "Valor (R$)"])
-            
-            agora = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-            escritor.writerow([agora, "USD", valor])
-            logging.info(f"💾 Dados salvos em: {LOG_FILE}")
-    except Exception as e:
-        logging.error(f"❌ Erro ao salvar arquivo: {e}")
+    arquivo = CAMBIO_CONFIG["arquivo_saida"]
+    header = ['Data_Hora', 'Valor_BRL']
+    existe = arquivo.exists()
+    agora = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-def pegar_dolar():
-    url = "https://economia.awesomeapi.com.br/last/USD-BRL"
-    try:
-        response = requests.get(url, timeout=10)
-        if response.status_code == 200:
-            dados = response.json()
-            valor = float(dados['USDBRL']['bid'])
-            
-            logging.info(f"💵 Valor capturado: R$ {valor:.2f}")
-            
-            # CHAMA A FUNÇÃO DE SALVAMENTO
-            salvar_no_historico(valor)
-            return valor
-    except Exception as e:
-        logging.error(f"❌ Falha na missão: {e}")
+    with open(arquivo, 'a', newline='', encoding='utf-8') as f:
+        writer = csv.writer(f)
+        if not existe:
+            writer.writerow(header)
+        writer.writerow([agora, valor])
+    
+    print(f"✅ Registro finalizado: R$ {valor} em {arquivo.name}")
 
 if __name__ == "__main__":
-    pegar_dolar() 
+    cotacao = buscar_cotacao()
+    salvar_dados(cotacao)

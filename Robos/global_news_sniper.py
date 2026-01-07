@@ -1,84 +1,89 @@
-#!/usr/bin/env python3 
-# --- DOCSTRINGS ---
+#!/usr/bin/env python3
 """
-NÍVEL 2: Agente 
-FUNÇÃO: Coletor internacional de notícias com suporte a múltiplos idiomas.
-CONCEITOS: 
+NÍVEL 2: Agente de Inteligência de Dados
+FUNÇÃO: Coleta e processa notícias internacionais via RSS (Feedparser).
+CONCEITOS: RSS Parsing, Normalização de Dados, Persistência Estruturada.
 """
 
-import requests
-import xml.etree.ElementTree as ET
+import sys
 import json
-import os
 import time
+import feedparser  # A forma sênior de ler RSS
+from pathlib import Path
+from urllib.parse import quote  # Essencial para tratar espaços e acentos na URL
 
-# --- CONFIGURAÇÃO: SNIPER GLOBAL (Google News) ---
+# --- BOOTSTRAP: CONEXÃO COM O SETTINGS ---
+BASE_DIR = Path(__file__).resolve().parent.parent
+if str(BASE_DIR) not in sys.path:
+    sys.path.append(str(BASE_DIR))
+
+try:
+    from Config.settings import DIRS
+    ARQUIVO_MEMORIA = DIRS["DATA"] / "memoria_world.json"
+except ImportError:
+    ARQUIVO_MEMORIA = BASE_DIR / "Data" / "memoria_world.json"
+    ARQUIVO_MEMORIA.parent.mkdir(parents=True, exist_ok=True)
+
+# --- CONFIGURAÇÃO ---
 TERMOS_ALVO = ["Inteligência Artificial", "Linux", "Python", "Cibersegurança"]
-ARQUIVO_MEMORIA = "Logs/memoria_world.json" # Memória exclusiva deste robô
 
 def carregar_memoria():
-    if os.path.exists(ARQUIVO_MEMORIA):
+    if ARQUIVO_MEMORIA.exists():
         try:
-            with open(ARQUIVO_MEMORIA, 'r') as f:
+            with open(ARQUIVO_MEMORIA, 'r', encoding='utf-8') as f:
                 return json.load(f)
         except:
+            # Se o arquivo estiver corrompido, retorna lista vazia
             return []
     return []
 
 def salvar_memoria(lista_vistos):
-    # Salva apenas os últimos 500 links
-    with open(ARQUIVO_MEMORIA, 'w') as f:
-        json.dump(lista_vistos[-500:], f)
+    with open(ARQUIVO_MEMORIA, 'w', encoding='utf-8') as f:
+        # Mantendo os últimos 500 para controle de duplicatas
+        json.dump(lista_vistos[-500:], f, indent=4, ensure_ascii=False)
 
 def buscar_google_news():
-    print(f"🌍 Iniciando Varredura Global (Google News RSS)...")
-    
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Compatible; SniperBot/2.0)'
-    }
+    print(f"🌍 Iniciando Varredura via Feedparser...")
     
     memoria = carregar_memoria()
     novas_descobertas = []
 
     for termo in TERMOS_ALVO:
+        # SENIOR: Encodar o termo para evitar erro de caracteres especiais e espaços
+        termo_safe = quote(termo)
         print(f"   Targeting: [{termo}]...")
         
-        # URL do RSS do Google News Brasil
-        url = f"https://news.google.com/rss/search?q={termo}&hl=pt-BR&gl=BR&ceid=BR:pt-419"
+        url = f"https://news.google.com/rss/search?q={termo_safe}&hl=pt-BR&gl=BR&ceid=BR:pt-419"
         
-        try:
-            response = requests.get(url, headers=headers)
-            response.raise_for_status()
+        # O feedparser faz a requisição e o parse do XML
+        feed = feedparser.parse(url)
+        
+        contador_termo = 0
+        for entry in feed.entries:
+            if contador_termo >= 3: 
+                break 
             
-            # O Google retorna XML. Vamos analisar a árvore.
-            root = ET.fromstring(response.content)
+            titulo = entry.title
+            link = entry.link
             
-            # Pega até 3 notícias por termo
-            contador_termo = 0
-            for item in root.findall('./channel/item'):
-                if contador_termo >= 3: break 
-                
-                titulo = item.find('title').text
-                link = item.find('link').text
-                
-                if link not in memoria:
-                    print(f"   🔥 ALVO ATINGIDO: {titulo}")
-                    print(f"      Link: {link}\n")
-                    
-                    memoria.append(link)
-                    novas_descobertas.append(titulo)
-                    contador_termo += 1
-            
-            time.sleep(1) # Respira para não ser bloqueado
-
-        except Exception as e:
-            print(f"❌ Erro ao buscar '{termo}': {e}")
+            if link not in memoria:
+                print(f"   🔥 ALVO ATINGIDO: {titulo}")
+                memoria.append(link)
+                novas_descobertas.append({
+                    "titulo": titulo, 
+                    "link": link, 
+                    "data": entry.get('published', 'N/A')
+                })
+                contador_termo += 1
+        
+        # Pausa técnica para evitar bloqueios (Rate Limiting)
+        time.sleep(1)
 
     if novas_descobertas:
         salvar_memoria(memoria)
-        print(f"✅ Missão cumprida. {len(novas_descobertas)} notícias globais arquivadas.")
+        print(f"✅ Missão cumprida. {len(novas_descobertas)} novos registros memorizados.")
     else:
-        print("💤 Nenhuma novidade no front global.")
+        print("💤 Sem novidades no radar.")
 
 if __name__ == "__main__":
     buscar_google_news()

@@ -1,9 +1,9 @@
 #!/usr/bin/env python3 
 # --- DOCSTRINGS ---
 """
-NÍVEL 2: Agente 
-FUNÇÃO: Crawler especializado em monitoramento de portais de emprego.
-CONCEITOS: 
+NÍVEL 1: Agente de Diagnóstico de Infraestrutura
+FUNÇÃO: Analisa logs do Kernel e métricas do sistema operacional Linux.
+CONCEITOS: Shell Integration, Log Parsing, Administração de Sistemas.
 """
 
 import requests

@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # --- DOCSTRINGS --- 
 """
-NÍVEL 4: Sintetizador de Voz e Áudio
-FUNÇÃO: Processamento de áudio e clonagem vocal para interfaces homem-máquina.
-CONCEITOS: Processamento de Sinal Digital, Síntese de Voz.
+NÍVEL 4: Sintetizador de Inteligência Auditiva
+FUNÇÃO: Processamento de áudio e síntese vocal para interfaces.
+CONCEITOS: DSP (Digital Signal Processing), TTS (Text-to-Speech), Waveform.
 """
 
 import torch
