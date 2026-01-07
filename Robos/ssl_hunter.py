@@ -1,9 +1,9 @@
 """
-Docstring-------------------------------------------------
+Docstring -
 ROBÔ: SSL HUNTER
 FUNÇÃO: Faz auditoria de segurança em sites específicos.
-        Ou seja, Auditor de Segurança: Checa certificados SSL de sites externos.
-STATUS: Ativo e funcional - Nível 2
+Ou seja, Auditor de Segurança: Checa certificados SSL de sites externos.
+STATUS: Ativo e funcional - Nível 2 
 """
 # --- SSL Hunter: Auditoria de Segurança ---
 import ssl
