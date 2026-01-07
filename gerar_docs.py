@@ -1,3 +1,4 @@
+
 """
 ROBÔ: ARQUITETO DE DOCS (V2.1 - Clean)
 FUNÇÃO: Padronização total da estrutura e remoção de poluição visual.
@@ -5,7 +6,7 @@ FUNÇÃO: Padronização total da estrutura e remoção de poluição visual.
 
 import os
 import re
-import subprocess
+import subprocess 
 
 MAPA_MODULOS = {
     "Robos": "### 🤖 /Robos",
