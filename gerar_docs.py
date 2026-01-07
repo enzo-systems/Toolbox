@@ -49,10 +49,16 @@ def gerar_lista_arquivos(pasta):
     linhas = []
     if os.path.exists(pasta):
         extensoes = ('.py', '.sh', '.json')
+        # Pega os arquivos da pasta
         arquivos = sorted([f for f in os.listdir(pasta) if f.endswith(extensoes)])
+        
         for arq in arquivos:
             caminho = os.path.join(pasta, arq)
-            linhas.append(f"- **[{arq}](./{pasta}/{arq})**: {get_git_info(caminho)}{extrair_docstring(caminho)}")
+            # SÓ ADICIONA SE O ARQUIVO EXISTIR DE VERDADE NO DISCO
+            if os.path.exists(caminho): 
+                git_info = get_git_info(caminho)
+                linhas.append(f"- **[{arq}](./{pasta}/{arq})**: {git_info}{extrair_docstring(caminho)}")
+    
     return linhas if linhas else ["- *Pasta inicializada.*"]
 
 def main():
