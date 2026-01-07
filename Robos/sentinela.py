@@ -1,7 +1,9 @@
 """
+Docstring-------------------------------------------------
 ROBÔ: SENTINELA
 FUNÇÃO: Monitora a conexão de rede a cada 60 segundos e evita que o log cresça demais.
-STATUS: Operacional com rotação de logs.
+        Ou seja, Zelador de Infra: Monitora rede e rotaciona logs para não encher o disco.
+STATUS: Operacional com rotação de logs - Nivel 1.
 """
 
 import time
@@ -15,7 +17,7 @@ from datetime import datetime
 # maxBytes = 5MB (5 * 1024 * 1024)
 # backupCount = 3 (Mantém o atual + 3 arquivos antigos de histórico)
 log_handler = RotatingFileHandler(
-    'sentinela.log', 
+    'Log/sentinela.log', 
     maxBytes=5*1024*1024, 
     backupCount=3
 )
