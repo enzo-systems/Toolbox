@@ -1,9 +1,9 @@
 """
-Docstring-------------------------------------------------
+Docstring -
 ROBÔ: SENTINELA FINANCEIRO
 FUNÇÃO: Captura cotação do dólar via API e mantém histórico em CSV.
-        Ou seja, Integrador de API: Captura dados financeiros profissionais e gera histórico.
-STATUS: Operacional - Nível 2.
+Ou seja, Integrador de API: Captura dados financeiros profissionais e gera histórico.
+STATUS: Operacional - Nível 2. 
 """
 
 import requests
