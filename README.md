@@ -31,12 +31,12 @@ Este repositório opera através de **Agentes Especializados** e uma infraestrut
 ### 👁️ /Agentes_Visao
 > Processamento de imagens, filtros e remoção de metadados.
 
-- **[vision_processor.py](./Agentes_Visao/vision_processor.py)**: (2026-01-08) | *NÍVEL 3: Processador de Visão Computacional FUNÇÃO: Higienização e formatação de fotos de perfil (LinkedIn Style). CONCEITOS: Pillow, Máscara Alpha, Organização de Data/output_images.*
+- **[vision_processor.py](./Agentes_Visao/vision_processor.py)**: (2026-01-08) | *NÍVEL 3: Processador de Visão Computacional (Vision Processor) FUNÇÃO: Higienização e formatação de fotos de perfil (LinkedIn Style) em lote. CONCEITOS: Pillow, Pipeline de I/O, Processamento em Batch.*
 
 ### 🎙️ /Agentes_Voz
 > Conversão de texto em fala (TTS) e inteligência auditiva.
 
-- **[voice_synthesizer.py](./Agentes_Voz/voice_synthesizer.py)**: (2026-01-08) | *NÍVEL 4: Sintetizador de Inteligência Auditiva FUNÇÃO: Processamento de áudio e síntese vocal para interfaces. CONCEITOS: DSP (Digital Signal Processing), TTS (Text-to-Speech), Waveform.*
+- **[voice_synthesizer.py](./Agentes_Voz/voice_synthesizer.py)**: (2026-01-08) | *NÍVEL 4: Sintetizador de Inteligência Auditiva (Voice Cloner) FUNÇÃO: Processamento de áudio e síntese vocal (TTS) com auto-conversão de formatos. CONCEITOS: DSP, Wrappers de FFmpeg, Pipeline de Áudio Automatizado.*
 
 ### 📜 /Scripts
 > Utilitários de manutenção, backup e automação de infraestrutura.
@@ -52,13 +52,15 @@ Este repositório opera através de **Agentes Especializados** e uma infraestrut
 > Repositório central organizado por subpastas (csv, json, images, audio).
 
 - **[csv/cotacao_dolar.csv](./Data/csv/cotacao_dolar.csv)**: (2026-01-08)
+- **[input_images/minha_foto.jpg](./Data/input_images/minha_foto.jpg)**: Novo
 - **[json/auditoria_ssl.json](./Data/json/auditoria_ssl.json)**: (2026-01-08)
-- **[json/global_news_memory.json](./Data/json/global_news_memory.json)**: Novo
+- **[json/global_news_memory.json](./Data/json/global_news_memory.json)**: (2026-01-08)
 - **[json/memoria_world.json](./Data/json/memoria_world.json)**: (2026-01-08)
-- **[json/news_sniper_memory.json](./Data/json/news_sniper_memory.json)**: Novo
+- **[json/news_sniper_memory.json](./Data/json/news_sniper_memory.json)**: (2026-01-08)
 - **[json/sentinela_status.json](./Data/json/sentinela_status.json)**: (2026-01-08)
 - **[json/vagas_encontradas.json](./Data/json/vagas_encontradas.json)**: (2026-01-08)
 - **[json/web_monitor_results.json](./Data/json/web_monitor_results.json)**: (2026-01-08)
+- **[output_images/perfil_minha_foto.png](./Data/output_images/perfil_minha_foto.png)**: Novo
 
 ### 📝 /Logs
 > Registro de atividades, histórico de erros e auditoria.

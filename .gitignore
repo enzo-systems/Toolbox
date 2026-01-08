@@ -1,31 +1,8 @@
-# --- Python ---
+.venv/
 __pycache__/
 *.pyc
-*.pyo
-*.pyd
-.Python
-env/
-# venv/ Se você decidir criar um ambiente virtual Python isolado,
-# o Git não precisa levar os gigabytes de bibliotecas instaladas.
-venv/ 
-# .env Importantíssimo! Se você começar a usar chaves de API ou senhas no Nível 2, 
-#elas ficam no arquivo .env. Esse arquivo nunca pode ir para o GitHub.
-.env
-
-# --- Logs e Dados Temporários ---
-# Ignora todos os arquivos dentro de Logs, mas mantém a pasta através do .gitkeep
-Logs/*
-!Logs/.gitkeep
-
-*.log
-nohup.out
-
-# --- Sistema e IDE ---
-.DS_Store
-.vscode/
-.idea/
-
-# --- Backups Locais ---
-# Caso você arraste sem querer a pasta oculta para dentro do projeto
-.ToolBox_Backups/
-*.tar.gz
+*.wav
+*.png
+*.jpg
+Data/output_audio/
+Data/output_images/

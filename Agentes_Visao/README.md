@@ -3,4 +3,4 @@
 > Processamento de imagens, filtros e remoção de metadados.
 
 ## 📜 Conteúdo Detectado
-- **[vision_processor.py](./vision_processor.py)**: (2026-01-08) | *NÍVEL 3: Processador de Visão Computacional FUNÇÃO: Higienização e formatação de fotos de perfil (LinkedIn Style). CONCEITOS: Pillow, Máscara Alpha, Organização de Data/output_images.*
+- **[vision_processor.py](./vision_processor.py)**: (2026-01-08) | *NÍVEL 3: Processador de Visão Computacional (Vision Processor) FUNÇÃO: Higienização e formatação de fotos de perfil (LinkedIn Style) em lote. CONCEITOS: Pillow, Pipeline de I/O, Processamento em Batch.*

@@ -1,1 +1,0 @@
-Olá! Aqui é o Ênzo. Muita gente acha que para mexer com inteligência artificial precisa de um computador da NASA. Mas hoje eu vou provar o contrário. Este áudio que você está ouvindo foi gerado num notebook Dell antigo, rodando Linux Fedora, usando apenas o processador. A voz pode ser sintética, mas a vontade de aprender é real. Vamos ao código!
