@@ -3,7 +3,7 @@
 ORQUESTRADOR: main.py
 FUNÇÃO: Gerador de Documentação Viva (Living Documentation).
 DESCRIÇÃO: Varre a estrutura do projeto e atualiza todos os README.md automaticamente.
-STATUS: Operacional - Modo Bibliotecário Sênior testetes
+STATUS: Operacional - Modo Bibliotecário Sênior agora vai
 """
 
 import os
