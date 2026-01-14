@@ -1,0 +1,1762 @@
+[0;32m##################################################[0m
+[0;32m###        RELATÓRIO DE ESTRUTURA E CÓDIGO     ###[0m
+[0;32m##################################################[0m
+
+[1;33m>>> ESTRUTURA DE DIRETÓRIOS:[0m
+.
+├── Agentes_Dados
+│   ├── career_hunter.py
+│   ├── cotacao_dolar.py
+│   ├── global_news_sniper.py
+│   ├── news_sniper.py
+│   └── README.md
+├── Agentes_Monitor
+│   ├── README.md
+│   ├── sentinela.py
+│   ├── ssl_hunter.py
+│   ├── system_expert.py
+│   ├── watchdog_sentinela.py
+│   └── web_monitor.py
+├── Agentes_Navegador
+│   ├── automatizar_formulario.py
+│   ├── automatizar_visual2.py
+│   ├── automatizar_visual.py
+│   └── posicao_cursor_tela.py
+├── Agentes_Visao
+│   ├── README.md
+│   └── vision_processor.py
+├── Agentes_Voz
+│   ├── README.md
+│   └── voice_synthesizer.py
+├── Assets
+│   └── README.md
+├── Config
+│   ├── README.md
+│   └── settings.py
+├── Data
+│   ├── csv
+│   │   ├── cotacao_dolar.csv
+│   │   └── produtos_automacao_formulario.csv
+│   ├── input_audio
+│   │   ├── referencia.m4a
+│   │   └── roteiro.txt
+│   ├── input_images
+│   │   └── perfil.jpg
+│   ├── json
+│   │   ├── auditoria_ssl.json
+│   │   ├── global_news_memory.json
+│   │   ├── memoria_world.json
+│   │   ├── news_sniper_memory.json
+│   │   ├── sentinela_status.json
+│   │   ├── vagas_encontradas.json
+│   │   └── web_monitor_results.json
+│   ├── output_audio
+│   ├── output_images
+│   │   └── perfil_perfil.png
+│   ├── ui_assets
+│   │   ├── campo_codigo_automatizar_visual.png
+│   │   └── campo_email_automatizar_visual.png
+│   └── README.md
+├── Docker
+│   └── README.md
+├── Docs
+│   └── README.md
+├── Logs
+│   └── README.md
+├── Scripts
+│   ├── audit_project.sh
+│   ├── backup_toolbox.sh
+│   └── README.md
+├── main.py
+├── README.md
+└── relatorio_kernel.txt
+
+20 directories, 47 files
+
+[0;32m##################################################[0m
+[0;32m###             CONTEÚDO DOS ARQUIVOS          ###[0m
+[0;32m##################################################[0m
+
+[0;36m==================================================[0m
+[0;36m📁 ARQUIVO: ./Agentes_Dados/career_hunter.py[0m
+[0;36m==================================================[0m
+#!/usr/bin/env python3
+"""
+NÍVEL 2: Career Hunter
+STATUS: Corrigido com Debug de Caminhos Absolutos.
+"""
+
+import sys
+import requests
+import json
+from bs4 import BeautifulSoup
+from pathlib import Path
+from datetime import datetime
+
+# --- BOOTSTRAP ---
+BASE_DIR = Path(__file__).resolve().parent.parent
+if str(BASE_DIR) not in sys.path:
+    sys.path.append(str(BASE_DIR))
+
+try:
+    from Config.settings import DIRS
+    ARQUIVO_SAIDA = DIRS["JSON"] / "vagas_encontradas.json"
+except ImportError:
+    ARQUIVO_SAIDA = BASE_DIR / "Data" / "json" / "vagas_encontradas.json"
+
+ARQUIVO_SAIDA.parent.mkdir(parents=True, exist_ok=True)
+
+def buscar_vagas():
+    url = "https://www.python.org/jobs/"
+    headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36'}
+    
+    print(f"📁 [DEBUG] Banco de Vagas: {ARQUIVO_SAIDA}")
+    print(f"👔 [Career Hunter] Monitorando: {url}")
+    
+    try:
+        resposta = requests.get(url, headers=headers, timeout=15)
+        soup = BeautifulSoup(resposta.text, 'html.parser')
+        vagas_html = soup.find_all('h2', class_='listing-company')
+        
+        achados = []
+        termos = ["brazil", "remote", "latam", "south america"]
+        
+        print(f"🔎 Analisando {len(vagas_html)} ofertas...")
+        
+        for item in vagas_html:
+            texto = item.get_text(strip=True)
+            if any(t in texto.lower() for t in termos):
+                link = "https://www.python.org" + item.find('a')['href'] if item.find('a') else "N/A"
+                print(f"   🎯 OPORTUNIDADE: {texto}")
+                achados.append({
+                    "data": datetime.now().strftime("%Y-%m-%d"),
+                    "vaga": texto,
+                    "link": link
+                })
+        return achados
+
+    except Exception as e:
+        print(f"❌ Erro: {e}")
+        return []
+
+def salvar_resultados(novas):
+    if not novas:
+        print("💤 Nada encontrado hoje.")
+        return
+
+    dados_db = []
+    if ARQUIVO_SAIDA.exists():
+        with open(ARQUIVO_SAIDA, 'r', encoding='utf-8') as f:
+            try: dados_db = json.load(f)
+            except: dados_db = []
+
+    links_db = {item['link'] for item in dados_db}
+    
+    reais = [v for v in novas if v['link'] not in links_db]
+    
+    if not reais:
+        print(f"🔄 Todas as {len(novas)} vagas encontradas já existem em:\n   📄 {ARQUIVO_SAIDA}")
+        return
+
+    dados_db.extend(reais)
+    with open(ARQUIVO_SAIDA, 'w', encoding='utf-8') as f:
+        json.dump(dados_db[-200:], f, indent=4, ensure_ascii=False)
+        
+    print(f"✅ {len(reais)} novas vagas salvas em:\n   📄 {ARQUIVO_SAIDA}")
+
+if __name__ == "__main__":
+    vagas = buscar_vagas()
+    salvar_resultados(vagas)
+[1;33m⬇️  FIM DE career_hunter.py[0m
+
+[0;36m==================================================[0m
+[0;36m📁 ARQUIVO: ./Agentes_Dados/cotacao_dolar.py[0m
+[0;36m==================================================[0m
+#!/usr/bin/env python3
+"""
+NÍVEL 2: Agente Financeiro Autônomo
+FUNÇÃO: Captura cotações em tempo real via API e gera séries históricas.
+CONCEITOS: Integração de APIs REST, Configuração Centralizada, Persistência CSV.
+"""
+
+import sys
+import requests
+import csv
+from datetime import datetime
+from pathlib import Path
+
+# --- BOOTSTRAP: CONEXÃO COM O SETTINGS ---
+BASE_DIR = Path(__file__).resolve().parent.parent
+if str(BASE_DIR) not in sys.path:
+    sys.path.append(str(BASE_DIR))
+
+try:
+    from Config.settings import CAMBIO_CONFIG, DIRS
+except ImportError:
+    print("❌ Erro: Não foi possível localizar Config/settings.py")
+    sys.exit(1)
+
+def buscar_cotacao():
+    try:
+        response = requests.get(CAMBIO_CONFIG["url_api"], timeout=10)
+        response.raise_for_status()
+        data = response.json()
+        par = list(data.keys())[0]
+        return data[par]['bid']
+    except Exception as e:
+        print(f"⚠️ Falha na coleta: {e}")
+        return None
+
+def salvar_dados(valor):
+    if not valor: return
+    
+    # Garantimos que o arquivo seja salvo dentro de Data/
+    arquivo = DIRS["DATA"] / "cotacao_dolar.csv"
+    header = ['Data_Hora', 'Valor_BRL']
+    existe = arquivo.exists()
+    agora = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+    with open(arquivo, 'a', newline='', encoding='utf-8') as f:
+        writer = csv.writer(f)
+        if not existe:
+            writer.writerow(header)
+        writer.writerow([agora, valor])
+    
+    print(f"✅ Registro arquivado em: Data/{arquivo.name} | Valor: R$ {valor}")
+
+if __name__ == "__main__":
+    cotacao = buscar_cotacao()
+    salvar_dados(cotacao)
+[1;33m⬇️  FIM DE cotacao_dolar.py[0m
+
+[0;36m==================================================[0m
+[0;36m📁 ARQUIVO: ./Agentes_Dados/global_news_sniper.py[0m
+[0;36m==================================================[0m
+#!/usr/bin/env python3
+"""
+NÍVEL 2: Agente de Inteligência de Dados (Global Sniper)
+FUNÇÃO: Coleta e processa notícias internacionais via RSS (Feedparser).
+CONCEITOS: RSS Parsing, Normalização de Dados, Persistência JSON.
+"""
+
+import sys
+import json
+import time
+import feedparser  # pip install feedparser
+from pathlib import Path
+from urllib.parse import quote 
+
+# --- BOOTSTRAP: CONEXÃO COM O SETTINGS ---
+BASE_DIR = Path(__file__).resolve().parent.parent
+if str(BASE_DIR) not in sys.path:
+    sys.path.append(str(BASE_DIR))
+
+try:
+    from Config.settings import DIRS
+    # CORREÇÃO SÊNIOR: Salvamos na pasta específica de JSON
+    ARQUIVO_MEMORIA = DIRS["JSON"] / "global_news_memory.json"
+except ImportError:
+    # Fallback seguro
+    ARQUIVO_MEMORIA = BASE_DIR / "Data" / "json" / "global_news_memory.json"
+
+# Garante que o diretório pai exista (caso rode isolado fora do main)
+ARQUIVO_MEMORIA.parent.mkdir(parents=True, exist_ok=True)
+
+# --- CONFIGURAÇÃO ---
+TERMOS_ALVO = ["Inteligência Artificial", "Linux", "Python", "Cibersegurança"]
+
+def carregar_memoria():
+    if ARQUIVO_MEMORIA.exists():
+        try:
+            with open(ARQUIVO_MEMORIA, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except Exception as e:
+            print(f"⚠️ Memória corrompida ou vazia ({e}). Iniciando nova.")
+            return []
+    return []
+
+def salvar_memoria(lista_vistos):
+    try:
+        with open(ARQUIVO_MEMORIA, 'w', encoding='utf-8') as f:
+            # Mantendo os últimos 500 para controle de duplicatas
+            json.dump(lista_vistos[-500:], f, indent=4, ensure_ascii=False)
+    except Exception as e:
+        print(f"❌ Erro ao salvar memória: {e}")
+
+def buscar_google_news():
+    print(f"🌍 [Global Sniper] Iniciando Varredura via Feedparser...")
+    
+    memoria = carregar_memoria()
+    novas_descobertas = []
+
+    for termo in TERMOS_ALVO:
+        termo_safe = quote(termo)
+        print(f"   📡 Sintonizando: [{termo}]...")
+        
+        # Google News RSS (Brasil)
+        url = f"https://news.google.com/rss/search?q={termo_safe}&hl=pt-BR&gl=BR&ceid=BR:pt-419"
+        
+        try:
+            feed = feedparser.parse(url)
+            
+            if feed.bozo: # feedparser flag para XML malformado
+                 print(f"      ⚠️ Aviso: XML instável para {termo}")
+
+            contador_termo = 0
+            for entry in feed.entries:
+                if contador_termo >= 3: 
+                    break 
+                
+                titulo = entry.title
+                link = entry.link
+                
+                if link not in memoria:
+                    print(f"      🔥 ALVO: {titulo[:60]}...")
+                    memoria.append(link)
+                    novas_descobertas.append({
+                        "titulo": titulo, 
+                        "link": link, 
+                        "data": entry.get('published', 'N/A')
+                    })
+                    contador_termo += 1
+        except Exception as e:
+            print(f"      ❌ Erro ao ler feed: {e}")
+        
+        time.sleep(1) # Rate Limiting
+
+    if novas_descobertas:
+        salvar_memoria(memoria)
+        print(f"✅ Missão cumprida. {len(novas_descobertas)} novos registros em {ARQUIVO_MEMORIA.name}.")
+    else:
+        print("💤 Sem novidades no radar global.")
+
+if __name__ == "__main__":
+    buscar_google_news()
+[1;33m⬇️  FIM DE global_news_sniper.py[0m
+
+[0;36m==================================================[0m
+[0;36m📁 ARQUIVO: ./Agentes_Dados/news_sniper.py[0m
+[0;36m==================================================[0m
+#!/usr/bin/env python3 
+"""
+NÍVEL 2: Agente de Extração de Dados (News Sniper)
+STATUS: Corrigido com Debug de Caminhos Absolutos.
+"""
+
+import sys
+import requests
+import json
+from bs4 import BeautifulSoup
+from pathlib import Path
+
+# --- BOOTSTRAP ---
+BASE_DIR = Path(__file__).resolve().parent.parent
+if str(BASE_DIR) not in sys.path:
+    sys.path.append(str(BASE_DIR))
+
+try:
+    from Config.settings import DIRS
+    ARQUIVO_MEMORIA = DIRS["JSON"] / "news_sniper_memory.json"
+except ImportError:
+    ARQUIVO_MEMORIA = BASE_DIR / "Data" / "json" / "news_sniper_memory.json"
+
+# Garante que a pasta existe
+ARQUIVO_MEMORIA.parent.mkdir(parents=True, exist_ok=True)
+
+URL_ALVO = "https://www.tabnews.com.br"
+PALAVRAS_CHAVE = ["inteligência artificial", "linux", "python"]
+
+def carregar_memoria():
+    if ARQUIVO_MEMORIA.exists():
+        try:
+            with open(ARQUIVO_MEMORIA, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except: return []
+    return []
+
+def salvar_memoria(lista_vistos):
+    try:
+        with open(ARQUIVO_MEMORIA, 'w', encoding='utf-8') as f:
+            json.dump(lista_vistos, f, indent=4)
+        return True
+    except Exception as e:
+        print(f"❌ Erro de permissão ao salvar em {ARQUIVO_MEMORIA}: {e}")
+        return False
+
+def caçar_noticias():
+    print(f"📁 [DEBUG] Arquivo de Memória: {ARQUIVO_MEMORIA}")
+    print(f"🕵️  [News Sniper] Varrendo TabNews...")
+    
+    headers = {'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36'}
+
+    try:
+        response = requests.get(URL_ALVO, headers=headers, timeout=10)
+        response.raise_for_status()
+    except Exception as e:
+        print(f"❌ Erro ao conectar: {e}")
+        return
+
+    soup = BeautifulSoup(response.text, 'html.parser')
+    links = soup.find_all('a')
+    
+    memoria = carregar_memoria()
+    novas_descobertas = []
+    
+    print(f"🔎 Analisando {len(links)} links...")
+
+    for link in links:
+        titulo = link.get_text().strip()
+        url_relativa = link.get('href')
+
+        if not titulo or len(titulo) < 5 or not url_relativa: continue
+            
+        url_final = url_relativa if url_relativa.startswith('http') else f"{URL_ALVO}{url_relativa}"
+        titulo_lower = titulo.lower()
+
+        # Verifica Keywords
+        encontrou = False
+        match = ""
+        for palavra in PALAVRAS_CHAVE:
+            if palavra in titulo_lower:
+                encontrou = True
+                match = palavra
+                break 
+        
+        if encontrou:
+            if url_final not in memoria:
+                print(f"   🎯 NOVO ALVO [{match.upper()}]: {titulo}")
+                memoria.append(url_final)
+                novas_descobertas.append(titulo)
+
+    if novas_descobertas:
+        salvar_memoria(memoria)
+        print(f"✅ Sucesso! {len(novas_descobertas)} novos itens salvos em:\n   📄 {ARQUIVO_MEMORIA}")
+    else:
+        # Força a criação do arquivo mesmo se não achar nada, pra você ver que funciona
+        if not ARQUIVO_MEMORIA.exists():
+            salvar_memoria(memoria)
+            print(f"⚠️ Nenhuma notícia nova, mas criei o arquivo de memória inicial.")
+        print(f"💤 Sem novidades. (Verificado contra base em: {ARQUIVO_MEMORIA.name})")
+
+if __name__ == "__main__":
+    caçar_noticias()
+[1;33m⬇️  FIM DE news_sniper.py[0m
+
+[0;36m==================================================[0m
+[0;36m📁 ARQUIVO: ./Agentes_Monitor/sentinela.py[0m
+[0;36m==================================================[0m
+#!/usr/bin/env python3
+"""
+NÍVEL 2: Sentinela de Infraestrutura
+FUNÇÃO: Vigia a conectividade e gerencia a rotatividade de logs do sistema.
+CONCEITOS: I/O de Sistema, RotatingFileHandler, Daemonize Simulation.
+"""
+
+import sys
+import time
+import socket
+import logging
+import json
+from logging.handlers import RotatingFileHandler
+from pathlib import Path
+from datetime import datetime
+
+# --- BOOTSTRAP: CONEXÃO COM O SETTINGS ---
+BASE_DIR = Path(__file__).resolve().parent.parent
+if str(BASE_DIR) not in sys.path:
+    sys.path.append(str(BASE_DIR))
+
+try:
+    from Config.settings import DIRS
+    CAMINHO_LOG = DIRS["LOGS"] / "sentinela.log"
+    STATUS_JSON = DIRS["JSON"] / "sentinela_status.json"
+except ImportError:
+    CAMINHO_LOG = Path("Logs/sentinela.log")
+    STATUS_JSON = Path("Data/json/sentinela_status.json")
+
+# --- 1. CONFIGURAÇÃO DE LOG ROTATIVO (PADRÃO SÊNIOR) ---
+log_handler = RotatingFileHandler(
+    CAMINHO_LOG, 
+    maxBytes=2*1024*1024, # Reduzi para 2MB para ser mais ágil
+    backupCount=3,
+    encoding='utf-8'
+)
+
+logging.basicConfig(
+    handlers=[log_handler],
+    level=logging.INFO, 
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
+)
+
+def checar_conexao():
+    """Verifica conectividade via Socket TCP na porta 53 (DNS)."""
+    try:
+        socket.create_connection(("8.8.8.8", 53), timeout=3)
+        return True
+    except OSError:
+        return False
+
+def atualizar_status_visual(online):
+    """Atualiza um JSON para que o main.py saiba o estado da rede sem ler logs."""
+    status = {
+        "ultimo_check": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "rede_online": online,
+        "agente": "Sentinela"
+    }
+    with open(STATUS_JSON, 'w', encoding='utf-8') as f:
+        json.dump(status, f, indent=4)
+
+if __name__ == "__main__":
+    print(f"🛡️  Sentinela iniciado. Log: {CAMINHO_LOG.name}")
+    print("🚦 Monitorando rede... (Pressione Ctrl+C para parar)")
+
+    try:
+        while True:
+            online = checar_conexao()
+            
+            if online:
+                logging.info("STATUS: ONLINE - Conectividade estabelecida.")
+            else:
+                logging.warning("ALERTA: OFFLINE - Falha de conexão detectada!")
+            
+            atualizar_status_visual(online)
+            
+            # O Arquiteto define o intervalo (60 segundos)
+            time.sleep(60)
+            
+    except KeyboardInterrupt:
+        print("\n🛑 Sentinela desativado pelo usuário.")
+        logging.info("Sentinela encerrado manualmente.")
+[1;33m⬇️  FIM DE sentinela.py[0m
+
+[0;36m==================================================[0m
+[0;36m📁 ARQUIVO: ./Agentes_Monitor/ssl_hunter.py[0m
+[0;36m==================================================[0m
+#!/usr/bin/env python3 
+"""
+NÍVEL 2: Auditor de Criptografia e Redes
+FUNÇÃO: Varredura e validação de certificados SSL/TLS em domínios externos.
+CONCEITOS: pyOpenSSL, Protocolos de Segurança, Persistência de Auditoria.
+"""
+
+import sys
+import ssl
+import socket
+import json
+from datetime import datetime, timezone
+from pathlib import Path
+
+# --- BOOTSTRAP ---
+BASE_DIR = Path(__file__).resolve().parent.parent
+if str(BASE_DIR) not in sys.path:
+    sys.path.append(str(BASE_DIR))
+
+try:
+    from Config.settings import DIRS
+    ARQUIVO_RELATORIO = DIRS["DATA"] / "auditoria_ssl.json"
+except ImportError:
+    ARQUIVO_RELATORIO = Path(__file__).resolve().parent.parent / "Data" / "auditoria_ssl.json"
+
+# Alvos de Auditoria
+dominios = ["google.com", "python.org", "expired.badssl.com"]
+
+def verificar_ssl(hostname):
+    resultado = {"host": hostname, "status": "Erro", "dias_restantes": None, "timestamp": datetime.now().isoformat()}
+    print(f"🔍 Analisando segurança: {hostname}")
+    
+    context = ssl.create_default_context()
+    try:
+        with socket.create_connection((hostname, 443), timeout=5) as sock:
+            with context.wrap_socket(sock, server_hostname=hostname) as ssock:
+                cert = ssock.getpeercert()
+                not_after = cert['notAfter']
+                expiry_date = datetime.strptime(not_after, r'%b %d %H:%M:%S %Y %Z').replace(tzinfo=timezone.utc)
+                days_left = (expiry_date - datetime.now(timezone.utc)).days
+                
+                resultado["dias_restantes"] = days_left
+                if days_left < 0:
+                    resultado["status"] = "VENCIDO"
+                    print(f"❌ {hostname}: Certificado EXPIRADO!")
+                else:
+                    resultado["status"] = "OK"
+                    print(f"✅ {hostname}: Seguro ({days_left} dias)")
+                    
+    except Exception as e:
+        resultado["status"] = f"Falha: {str(e)}"
+        print(f"⚠️ {hostname}: Erro de conexão ou SSL.")
+    
+    return resultado
+
+def salvar_auditoria(dados):
+    historico = []
+    if ARQUIVO_RELATORIO.exists():
+        with open(ARQUIVO_RELATORIO, 'r') as f:
+            try: historico = json.load(f)
+            except: historico = []
+    
+    historico.append(dados)
+    with open(ARQUIVO_RELATORIO, 'w') as f:
+        json.dump(historico[-50:], f, indent=4) # Mantém as últimas 50 análises
+
+if __name__ == "__main__":
+    relatorio_final = []
+    for site in dominios:
+        res = verificar_ssl(site)
+        relatorio_final.append(res)
+    
+    salvar_auditoria(relatorio_final)
+    print(f"💾 Auditoria salva em: Data/{ARQUIVO_RELATORIO.name}")
+[1;33m⬇️  FIM DE ssl_hunter.py[0m
+
+[0;36m==================================================[0m
+[0;36m📁 ARQUIVO: ./Agentes_Monitor/system_expert.py[0m
+[0;36m==================================================[0m
+#!/usr/bin/env python3 
+"""
+NÍVEL 1: Agente de Diagnóstico de Infraestrutura
+FUNÇÃO: Analisa comandos Linux e gera documentação formatada para comunidades.
+CONCEITOS: Shell Integration, Log Parsing, Integração com API TLDR.
+"""
+
+import sys
+import requests
+import json
+from pathlib import Path
+from datetime import datetime
+
+# --- BOOTSTRAP: CONEXÃO COM O SETTINGS ---
+BASE_DIR = Path(__file__).resolve().parent.parent
+if str(BASE_DIR) not in sys.path:
+    sys.path.append(str(BASE_DIR))
+
+try:
+    from Config.settings import DIRS
+    ARQUIVO_ENCICLOPEDIA = DIRS["DATA"] / "enciclopedia_linux.json"
+except ImportError:
+    ARQUIVO_ENCICLOPEDIA = BASE_DIR / "Data" / "enciclopedia_linux.json"
+    ARQUIVO_ENCICLOPEDIA.parent.mkdir(parents=True, exist_ok=True)
+
+def buscar_sabedoria(comando):
+    # URLs de busca (Ordem: PT-BR Common -> Linux -> EN Common -> Linux)
+    urls = [
+        f"https://raw.githubusercontent.com/tldr-pages/tldr/main/pages.pt_BR/common/{comando}.md",
+        f"https://raw.githubusercontent.com/tldr-pages/tldr/main/pages.pt_BR/linux/{comando}.md",
+        f"https://raw.githubusercontent.com/tldr-pages/tldr/main/pages/common/{comando}.md",
+        f"https://raw.githubusercontent.com/tldr-pages/tldr/main/pages/linux/{comando}.md"
+    ]
+
+    print(f"🔍 Buscando conhecimento sobre: '{comando}'...")
+    conteudo_raw = ""
+    
+    for url in urls:
+        try:
+            r = requests.get(url, timeout=5)
+            if r.status_code == 200:
+                conteudo_raw = r.text
+                break
+        except:
+            continue
+
+    if not conteudo_raw:
+        print(f"❌ Comando '{comando}' não encontrado na base TLDR.")
+        return None
+
+    return formatar_para_discord(comando, conteudo_raw)
+
+def formatar_para_discord(comando, raw_text):
+    linhas = raw_text.split('\n')
+    saida_discord = f"**💡 Dica Rápida: Dominando o `{comando}`**\n\n"
+    
+    for linha in linhas:
+        if linha.startswith('>'): 
+            saida_discord += f"_{linha.replace('>', '').strip()}_\n"
+        elif linha.startswith('-'):
+            saida_discord += f"\n🔹 **{linha.replace('-', '').strip()}**\n"
+        elif linha.startswith('`'):
+            codigo = linha.replace('`', '').strip()
+            saida_discord += f"```bash\n{codigo}\n```"
+
+    saida_discord += "\n_Fonte: tldr-pages | Curadoria: ToolBox_"
+    return saida_discord
+
+def arquivar_comando(comando, formatado):
+    """Guarda a consulta na nossa base de dados local."""
+    base = {}
+    if ARQUIVO_ENCICLOPEDIA.exists():
+        with open(ARQUIVO_ENCICLOPEDIA, 'r', encoding='utf-8') as f:
+            base = json.load(f)
+    
+    base[comando] = {
+        "data_consulta": datetime.now().strftime("%Y-%m-%d"),
+        "conteudo": formatado
+    }
+
+    with open(ARQUIVO_ENCICLOPEDIA, 'w', encoding='utf-8') as f:
+        json.dump(base, f, indent=4, ensure_ascii=False)
+    print(f"💾 Conhecimento arquivado em: {ARQUIVO_ENCICLOPEDIA.name}")
+
+if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        cmd_input = sys.argv[1]
+    else:
+        cmd_input = input("Qual comando Linux você quer explicar hoje? (ex: tar): ")
+
+    resultado = buscar_sabedoria(cmd_input.lower())
+    
+    if resultado:
+        print("\n" + "="*40)
+        print(resultado)
+        print("="*40 + "\n")
+        arquivar_comando(cmd_input.lower(), resultado)
+[1;33m⬇️  FIM DE system_expert.py[0m
+
+[0;36m==================================================[0m
+[0;36m📁 ARQUIVO: ./Agentes_Monitor/watchdog_sentinela.py[0m
+[0;36m==================================================[0m
+#!/usr/bin/env python3
+"""
+NÍVEL 2: Watchdog (Supervisor de Resiliência)
+FUNÇÃO: Valida o heartbeat do Sentinela e dispara alertas visuais no Fedora.
+CONCEITOS: Auditoria de Heartbeat, Notificação de Sistema (GNOME), Resiliência.
+"""
+
+import sys
+import json
+import subprocess
+from pathlib import Path
+from datetime import datetime
+
+# --- BOOTSTRAP: CONEXÃO COM O SETTINGS ---
+BASE_DIR = Path(__file__).resolve().parent.parent
+if str(BASE_DIR) not in sys.path:
+    sys.path.append(str(BASE_DIR))
+
+try:
+    from Config.settings import DIRS
+    STATUS_SENTINELA = DIRS["JSON"] / "sentinela_status.json"
+    LOG_SISTEMA = DIRS["LOGS"] / "system_toolbox.log"
+except ImportError:
+    STATUS_SENTINELA = Path("Data/json/sentinela_status.json")
+    LOG_SISTEMA = Path("Logs/system_toolbox.log")
+
+def enviar_notificacao_fedora(mensagem):
+    """Sua ideia original: Alerta visual no GNOME/Fedora."""
+    try:
+        subprocess.run(['notify-send', '-u', 'critical', '🚨 ToolBox Watchdog', mensagem])
+    except: pass
+
+def auditar_sistema():
+    print("🐕 [Watchdog] Checando batimentos do Sentinela...")
+    
+    if not STATUS_SENTINELA.exists():
+        msg = "Sentinela NUNCA foi iniciado!"
+        registrar_e_notificar(msg)
+        return
+
+    try:
+        with open(STATUS_SENTINELA, 'r', encoding='utf-8') as f:
+            status = json.load(f)
+        
+        ultimo_check = datetime.strptime(status["ultimo_check"], "%Y-%m-%d %H:%M:%S")
+        atraso = (datetime.now() - ultimo_check).total_seconds()
+
+        # Se o Sentinela não der sinal de vida por mais de 3 minutos
+        if atraso > 180:
+            msg = f"Sentinela travado! Último sinal há {int(atraso)}s."
+            registrar_e_notificar(msg)
+        else:
+            print(f"✅ Sistema Saudável. (Atraso: {int(atraso)}s)")
+
+    except Exception as e:
+        registrar_e_notificar(f"Erro na auditoria: {e}")
+
+def registrar_e_notificar(msg):
+    print(f"⚠️ {msg}")
+    agora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    # Escreve no Log Central
+    with open(LOG_SISTEMA, 'a', encoding='utf-8') as f:
+        f.write(f"{agora} - [WATCHDOG] - {msg}\n")
+    # Envia o Popup no seu Fedora
+    enviar_notificacao_fedora(msg)
+
+if __name__ == "__main__":
+    auditar_sistema()
+[1;33m⬇️  FIM DE watchdog_sentinela.py[0m
+
+[0;36m==================================================[0m
+[0;36m📁 ARQUIVO: ./Agentes_Monitor/web_monitor.py[0m
+[0;36m==================================================[0m
+#!/usr/bin/env python3
+"""
+NÍVEL 2: Agente de Integridade de Redes
+FUNÇÃO: Monitora disponibilidade e latência de serviços web críticos.
+CONCEITOS: Socket Programming, HTTP Status Monitoring, Tempo de Resposta.
+"""
+
+import sys
+import requests
+import json
+import time
+from pathlib import Path
+from datetime import datetime
+
+# --- BOOTSTRAP: CONEXÃO COM O SETTINGS ---
+BASE_DIR = Path(__file__).resolve().parent.parent
+if str(BASE_DIR) not in sys.path:
+    sys.path.append(str(BASE_DIR))
+
+try:
+    from Config.settings import DIRS, LOGGING_CONF
+    # Definimos onde salvar os resultados da inspeção
+    ARQUIVO_DATA = DIRS["DATA"] / "web_monitor_results.json"
+    ARQUIVO_LOG = DIRS["LOGS"] / "web_monitor.log"
+except ImportError:
+    ARQUIVO_DATA = BASE_DIR / "Data" / "web_monitor_results.json"
+    ARQUIVO_LOG = BASE_DIR / "Logs" / "web_monitor.log"
+    ARQUIVO_DATA.parent.mkdir(parents=True, exist_ok=True)
+    ARQUIVO_LOG.parent.mkdir(parents=True, exist_ok=True)
+
+def explorar_site(url):
+    # O Disfarce (User-Agent) atualizado
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36'
+    }
+
+    inicio = time.time()
+    resultado = {
+        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "url": url,
+        "status": None,
+        "latencia_ms": 0,
+        "bytes": 0,
+        "sucesso": False
+    }
+
+    try:
+        print(f"🛰️  Tentando acessar: {url}")
+        
+        # Requisição com Timeout (Regra sênior para evitar scripts zumbis)
+        response = requests.get(url, headers=headers, timeout=10)
+        resultado["latencia_ms"] = round((time.time() - inicio) * 1000, 2)
+        resultado["status"] = response.status_code
+        resultado["bytes"] = len(response.text)
+
+        if response.status_code == 200:
+            print(f"✅ Conexão estabelecida! ({resultado['latencia_ms']}ms)")
+            resultado["sucesso"] = True
+        else:
+            print(f"⚠️ Servidor retornou código: {response.status_code}")
+
+    except Exception as e:
+        erro_msg = f"❌ Erro na missão: {e}"
+        print(erro_msg)
+        # Log de erro sênior
+        with open(ARQUIVO_LOG, 'a', encoding='utf-8') as f:
+            f.write(f"{resultado['timestamp']} - {url} - {erro_msg}\n")
+    
+    return resultado
+
+def salvar_inspecao(dados):
+    """Persistência de dados para análise futura."""
+    historico = []
+    if ARQUIVO_DATA.exists():
+        try:
+            with open(ARQUIVO_DATA, 'r', encoding='utf-8') as f:
+                historico = json.load(f)
+        except:
+            historico = []
+
+    historico.append(dados)
+    
+    # Mantém apenas as últimas 100 inspeções para não inflar o JSON
+    with open(ARQUIVO_DATA, 'w', encoding='utf-8') as f:
+        json.dump(historico[-100:], f, indent=4, ensure_ascii=False)
+    print(f"💾 Resultado arquivado em: {ARQUIVO_DATA}")
+
+if __name__ == "__main__":
+    # Alvo vindo da sua versão original
+    alvo = "https://pt.wikipedia.org/wiki/Python"
+    relatorio = explorar_site(alvo)
+    salvar_inspecao(relatorio)
+[1;33m⬇️  FIM DE web_monitor.py[0m
+
+[0;36m==================================================[0m
+[0;36m📁 ARQUIVO: ./Agentes_Navegador/automatizar_formulario.py[0m
+[0;36m==================================================[0m
+#!/usr/bin/env python3
+"""
+NÍVEL 2: Agente Navegador Autônomo
+FUNÇÃO: Simula um usuário acessando um site e preenchendo formulários 
+        Auxiliado por posicao_cursor_tela.py e Data/csv/produtos_automacao_formulario.csv  
+CONCEITOS: Automação de Tarefas e Bots | Acesso a Informações de Arquivo CSV.
+"""
+import pyautogui
+import time
+import pandas as pd
+from pathlib import Path
+import webbrowser
+
+# ---Lógica da Programação---
+pyautogui.PAUSE = 0.5 
+
+# Passo1: Entrar no sistema da empresa
+site = "https://dlp.hashtagtreinamentos.com/python/intensivao/login"
+
+# Tenta abrir o Firefox especificamente, se falhar, abre o padrão
+try:
+    print("Tentando abrir Firefox...")
+    webbrowser.get('firefox').open(site)
+except webbrowser.Error:
+    print("Firefox não encontrado, usando navegador padrão...")
+    webbrowser.open(site)
+
+# Passo2: Fazer Login
+# Aumentamos para 6s para garantir que a INTERNET carregou o site
+# Se sua internet oscilar, talvez precise de mais tempo.
+time.sleep(6) 
+
+# Clica no campo de e-mail
+pyautogui.click(x=417, y=436)
+pyautogui.write("hackeando_hashtag@gmail.com")
+pyautogui.press("tab")
+pyautogui.write("senha_hacker")
+pyautogui.press("tab")
+pyautogui.press("enter")
+
+# Passo3: Abrir a base de dados
+time.sleep(4) # Pausa para carregar a próxima página após o login
+CAMINHO_SCRIPT = Path(__file__).resolve().parent 
+ARQUIVO_CSV = CAMINHO_SCRIPT.parent / "Data" / "csv" / "produtos_automacao_formulario.csv"
+tabela = pd.read_csv(ARQUIVO_CSV) 
+
+# Passo4: Cadastrar Produto
+for linha in tabela.index:    
+    # Clique inicial para garantir o foco
+    pyautogui.click(x=439, y=320)
+    
+    # codigo   
+    codigo = str(tabela.loc[linha, "codigo"])
+    pyautogui.write(codigo)
+    pyautogui.press("tab")
+    
+    # marca    
+    marca = str(tabela.loc[linha, "marca"])
+    pyautogui.write(marca)
+    pyautogui.press("tab")
+    
+    # tipo    
+    tipo = str(tabela.loc[linha, "tipo"])
+    pyautogui.write(tipo)
+    pyautogui.press("tab")
+    
+    # categoria    
+    categoria = str(tabela.loc[linha, "categoria"])
+    pyautogui.write(categoria)
+    pyautogui.press("tab")
+    
+    # preço unitário    
+    preco = str(tabela.loc[linha, "preco_unitario"])
+    pyautogui.write(preco)
+    pyautogui.press("tab")
+    
+    # custo    
+    custo = str(tabela.loc[linha, "custo"])
+    pyautogui.write(custo)
+    pyautogui.press("tab")
+    
+    # obs    
+    obs = str(tabela.loc[linha, "obs"])
+    if obs != "nan": 
+       pyautogui.write(obs)
+    pyautogui.press("tab")
+    
+    # Enviar
+    pyautogui.press("enter") 
+    
+    # Rolar para cima para o próximo loop
+    pyautogui.press("pgup")
+[1;33m⬇️  FIM DE automatizar_formulario.py[0m
+
+[0;36m==================================================[0m
+[0;36m📁 ARQUIVO: ./Agentes_Navegador/automatizar_visual2.py[0m
+[0;36m==================================================[0m
+#!/usr/bin/env python3
+"""
+NÍVEL 3: Agente Navegador Visual (Integrado ao ToolBox)
+LOCAL: ~/Projetos/ToolBox/Agentes_Navegador/bot_formulario_visual.py
+"""
+import sys
+import time
+import pyautogui
+import pandas as pd
+import webbrowser
+from pathlib import Path
+
+# --- Configuração de Caminhos (Dinâmica e à prova de falhas) ---
+# O arquivo está em ToolBox/Agentes_Navegador
+BASE_DIR = Path(__file__).resolve().parent.parent 
+# Agora BASE_DIR = ~/Projetos/ToolBox
+
+# Ajuste conforme o que tem dentro da sua pasta Data (csv ou inputs)
+ARQUIVO_CSV = BASE_DIR / "Data" / "csv" / "produtos_automacao_formulario.csv"
+PASTA_IMAGENS = BASE_DIR / "Data" / "ui_assets"
+
+# Se a pasta Config for usada no futuro, ela já está mapeada
+sys.path.append(str(BASE_DIR))
+
+# --- Configurações Visuais ---
+CONFIDENCE_LEVEL = 0.7 
+pyautogui.PAUSE = 0.5
+
+def esperar_e_clicar(nome_imagem, tempo_limite=20, offset_x=0, offset_y=0):
+    """Busca visual com timeout e offset."""
+    caminho_img = str(PASTA_IMAGENS / nome_imagem)
+    inicio = time.time()
+    
+    while True:
+        try:
+            localizacao = pyautogui.locateCenterOnScreen(caminho_img, confidence=CONFIDENCE_LEVEL, grayscale=True)
+            if localizacao:
+                x, y = localizacao
+                pyautogui.click(x + offset_x, y + offset_y)
+                return True
+        except pyautogui.ImageNotFoundException:
+            pass 
+        except Exception:
+            pass # Ignora erros pontuais de leitura
+
+        if time.time() - inicio > tempo_limite:
+            return False
+        time.sleep(0.5)
+
+# --- EXECUÇÃO ---
+print(f"🔧 [KERNEL] Iniciando processo em: {BASE_DIR}")
+
+# 1. Carregamento e Higienização Inteligente (A Maestria com Pandas)
+try:
+    print("   📂 Lendo e tratando dados...", end=" ")
+    tabela = pd.read_csv(ARQUIVO_CSV)
+    
+    # Tratamento em lote (muito mais rápido que fazer no loop)
+    tabela["obs"] = tabela["obs"].fillna("") 
+    tabela["custo"] = tabela["custo"].fillna(0)
+    
+    # Converte colunas numéricas para string e ajusta vírgula de uma vez
+    cols_numericas = ["preco_unitario", "custo"]
+    for col in cols_numericas:
+        tabela[col] = tabela[col].astype(str).str.replace(".", ",", regex=False)
+        
+    print("Feito!")
+except FileNotFoundError:
+    print(f"\n❌ Erro Crítico: Não achei o CSV em: {ARQUIVO_CSV}")
+    print("   Verifique se a pasta 'csv' existe dentro de 'Data'.")
+    exit()
+
+# 2. Navegador
+site = "https://dlp.hashtagtreinamentos.com/python/intensivao/login"
+try:
+    webbrowser.get('firefox').open(site)
+except:
+    webbrowser.open(site)
+
+# 3. Login
+if esperar_e_clicar("campo_email_automatizar_visual.png", offset_y=35):
+    pyautogui.write("hackeando_hashtag@gmail.com")    
+    pyautogui.press("tab")
+    pyautogui.write("senha_hacker")
+    pyautogui.press("tab")
+    pyautogui.press("enter")
+else:
+    print("❌ Falha no Login: Campo não encontrado.")
+    exit()
+
+# 4. Loop de Preenchimento (Agora limpo e rápido)
+for i, linha in enumerate(tabela.index):
+    print(f"   📝 Processando item {i+1}/{len(tabela)}", end="\r")
+    
+    # Sincronia Visual (Ancoragem)
+    if not esperar_e_clicar("campo_codigo_automatizar_visual.png", tempo_limite=3, offset_y=35):
+        pyautogui.press("tab") # Fallback se a visão falhar
+    
+    # Preenchimento (Dados já estão limpos)
+    pyautogui.write(str(tabela.loc[linha, "codigo"]))
+    pyautogui.press("tab")
+    
+    pyautogui.write(str(tabela.loc[linha, "marca"]))
+    pyautogui.press("tab")
+    
+    pyautogui.write(str(tabela.loc[linha, "tipo"]))
+    pyautogui.press("tab")
+    
+    pyautogui.write(str(tabela.loc[linha, "categoria"]))
+    pyautogui.press("tab")
+    
+    pyautogui.write(tabela.loc[linha, "preco_unitario"]) # Já formatado
+    pyautogui.press("tab")
+    
+    pyautogui.write(tabela.loc[linha, "custo"]) # Já formatado
+    pyautogui.press("tab")
+    
+    obs = tabela.loc[linha, "obs"]
+    if obs:
+       pyautogui.write(str(obs))
+    pyautogui.press("tab")
+    
+    pyautogui.press("enter")
+    pyautogui.press("pgup")
+    time.sleep(0.5)
+
+print("\n✅ Automação Finalizada com Sucesso.")
+[1;33m⬇️  FIM DE automatizar_visual2.py[0m
+
+[0;36m==================================================[0m
+[0;36m📁 ARQUIVO: ./Agentes_Navegador/automatizar_visual.py[0m
+[0;36m==================================================[0m
+#!/usr/bin/env python3
+"""
+NÍVEL 3: Agente Navegador com Visão Computacional
+FUNÇÃO: Localiza elementos na tela por imagem.
+        Sincroniza visualmente a cada produto para não perder o passo.
+DEPENDÊNCIAS: pip install opencv-python pyautogui pandas
+"""
+import pyautogui
+import time
+import pandas as pd
+from pathlib import Path
+import webbrowser
+
+# --- Configurações ---
+CONFIDENCE_LEVEL = 0.7 
+pyautogui.PAUSE = 0.5
+
+# Caminhos
+CAMINHO_SCRIPT = Path(__file__).resolve().parent
+ARQUIVO_CSV = CAMINHO_SCRIPT.parent / "Data" / "csv" / "produtos_automacao_formulario.csv"
+PASTA_IMAGENS = CAMINHO_SCRIPT.parent / "Data" / "ui_assets"
+
+# --- Função Visual ---
+def esperar_e_clicar(nome_imagem, tempo_limite=20, offset_x=0, offset_y=0):
+    caminho_img = str(PASTA_IMAGENS / nome_imagem)
+    inicio = time.time()
+    # print(f"Procurando: {nome_imagem}...") # Comentei para limpar o terminal
+    
+    while True:
+        try:
+            localizacao = pyautogui.locateCenterOnScreen(caminho_img, confidence=CONFIDENCE_LEVEL, grayscale=True)
+            if localizacao:
+                x, y = localizacao
+                pyautogui.click(x + offset_x, y + offset_y)
+                return True
+        except pyautogui.ImageNotFoundException:
+            pass 
+        except Exception:
+            pass
+
+        if time.time() - inicio > tempo_limite:
+            return False
+        time.sleep(0.5)
+
+# --- Início ---
+print("Iniciando Agente Visual...")
+site = "https://dlp.hashtagtreinamentos.com/python/intensivao/login"
+
+try:
+    webbrowser.get('firefox').open(site)
+except:
+    webbrowser.open(site)
+
+# Login
+if esperar_e_clicar("campo_email_automatizar_visual.png", offset_y=35):
+    pyautogui.write("hackeando_hashtag@gmail.com")    
+    pyautogui.press("tab")
+    pyautogui.write("senha_hacker")
+    pyautogui.press("tab")
+    pyautogui.press("enter")
+else:
+    print("❌ Erro: Login falhou (Imagem não encontrada)")
+    exit()
+
+# Dados
+tabela = pd.read_csv(ARQUIVO_CSV)
+
+# Cadastro (Loop Sincronizado)
+for linha in tabela.index:
+    
+    # 1. SINCRONIZAÇÃO VISUAL
+    # Tenta clicar no campo código. Se falhar visualmente, usa o TAB como emergência.
+    if not esperar_e_clicar("campo_codigo_automatizar_visual.png", tempo_limite=3, offset_y=35):
+        print(f"⚠️ Aviso: Sincronia visual perdida na linha {linha}. Tentando TAB.")
+        pyautogui.press("tab")
+    
+    # Se o clique funcionou, o cursor JÁ está no lugar certo. E o TAB de emergência não ocorrerá.
+    
+    # 1. Código
+    codigo = str(tabela.loc[linha, "codigo"])
+    pyautogui.write(codigo)
+    pyautogui.press("tab")
+    
+    # 2. Marca
+    marca = str(tabela.loc[linha, "marca"])
+    pyautogui.write(marca)
+    pyautogui.press("tab")
+    
+    # 3. Tipo
+    tipo = str(tabela.loc[linha, "tipo"])
+    pyautogui.write(tipo)
+    pyautogui.press("tab")
+    
+    # 4. Categoria
+    categoria = str(tabela.loc[linha, "categoria"])
+    pyautogui.write(categoria)
+    pyautogui.press("tab")
+    
+    # 5. Preço (Com tratamento de Vírgula)
+    preco = str(tabela.loc[linha, "preco_unitario"])
+    preco = preco.replace(".", ",") 
+    pyautogui.write(preco)
+    pyautogui.press("tab")
+    
+    # 6. Custo (Com tratamento de Vírgula e Vazio)
+    custo = str(tabela.loc[linha, "custo"])
+    if custo == "nan": custo = "0"
+    custo = custo.replace(".", ",")
+    pyautogui.write(custo)
+    pyautogui.press("tab")
+    
+    # 7. Obs
+    obs = str(tabela.loc[linha, "obs"])
+    if obs != "nan":
+       pyautogui.write(obs)
+    pyautogui.press("tab")
+    
+    # Enviar e Reiniciar
+    pyautogui.press("enter")
+    pyautogui.press("pgup")
+    # Pequena pausa para a tela rolar antes de procurar a imagem de novo
+    time.sleep(0.5)
+[1;33m⬇️  FIM DE automatizar_visual.py[0m
+
+[0;36m==================================================[0m
+[0;36m📁 ARQUIVO: ./Agentes_Navegador/posicao_cursor_tela.py[0m
+[0;36m==================================================[0m
+import time
+import pyautogui
+
+time.sleep(5)
+print(pyautogui.position())
+
+pyautogui.scroll(200)
+[1;33m⬇️  FIM DE posicao_cursor_tela.py[0m
+
+[0;36m==================================================[0m
+[0;36m📁 ARQUIVO: ./Agentes_Visao/vision_processor.py[0m
+[0;36m==================================================[0m
+#!/usr/bin/env python3
+"""
+NÍVEL 3: Processador de Visão Computacional (Vision Processor)
+FUNÇÃO: Higienização e formatação de fotos de perfil (LinkedIn Style) em lote.
+CONCEITOS: Pillow, Pipeline de I/O, Processamento em Batch.
+"""
+
+import sys
+from pathlib import Path
+from PIL import Image, ImageOps, ImageDraw
+
+# --- BOOTSTRAP: CONEXÃO COM O SETTINGS ---
+BASE_DIR = Path(__file__).resolve().parent.parent
+if str(BASE_DIR) not in sys.path:
+    sys.path.append(str(BASE_DIR))
+
+try:
+    from Config.settings import DIRS
+    # MUDANÇA ESTRUTURAL:
+    # input_images -> Onde você joga as fotos
+    # output_images -> Onde o robô entrega o resultado
+    DIR_ENTRADA = DIRS["IN_IMAGES"]
+    DIR_SAIDA = DIRS["OUT_IMAGES"]
+except ImportError:
+    # Fallback seguro
+    DIR_ENTRADA = BASE_DIR / "Data" / "input_images"
+    DIR_SAIDA = BASE_DIR / "Data" / "output_images"
+
+# Garante a infraestrutura física
+DIR_ENTRADA.mkdir(parents=True, exist_ok=True)
+DIR_SAIDA.mkdir(parents=True, exist_ok=True)
+
+def processar_foto(caminho_arquivo):
+    """Aplica a lógica de design (Corte Circular + Zoom)"""
+    try:
+        nome_arquivo = Path(caminho_arquivo).name
+        print(f"   🖼️  Processando: {nome_arquivo}...", end=" ")
+        
+        img = Image.open(caminho_arquivo)
+        img = ImageOps.exif_transpose(img) # Corrige rotação de celular
+        img = img.convert("RGBA")
+        
+        # 1. Lógica de Zoom (Foco no rosto)
+        fator_zoom = 0.20 
+        borda = int(min(img.size) * fator_zoom)
+        img_com_borda = ImageOps.expand(img, border=borda, fill='white')
+
+        # 2. Corte Quadrado Centralizado (Foco 35% do topo)
+        min_lado = min(img_com_borda.size)
+        tamanho_quadrado = (min_lado, min_lado)
+        img_quadrada = ImageOps.fit(img_com_borda, tamanho_quadrado, centering=(0.5, 0.35))
+        
+        # 3. Máscara Circular (Alpha Channel)
+        mascara = Image.new('L', tamanho_quadrado, 0)
+        draw = ImageDraw.Draw(mascara)
+        draw.ellipse((0, 0) + tamanho_quadrado, fill=255)
+        img_quadrada.putalpha(mascara)
+
+        # 4. Resize final e Salvamento
+        img_final = img_quadrada.resize((500, 500), Image.Resampling.LANCZOS)
+        
+        nome_saida = f"perfil_{Path(nome_arquivo).stem}.png"
+        caminho_final = DIR_SAIDA / nome_saida
+        
+        img_final.save(caminho_final, "PNG", optimize=True)
+        print(f"✅ Feito!")
+        return True
+
+    except Exception as e:
+        print(f"❌ Falha: {e}")
+        return False
+
+def executar_pipeline():
+    print(f"👁️  [Vision Processor] Monitorando esteira: {DIR_ENTRADA}")
+    
+    # Extensões suportadas
+    extensoes = ['*.jpg', '*.jpeg', '*.png', '*.webp']
+    arquivos = []
+    for ext in extensoes:
+        arquivos.extend(DIR_ENTRADA.glob(ext))
+    
+    if not arquivos:
+        print(f"💤 A pasta de entrada está vazia.")
+        print(f"   👉 Dica: Coloque fotos em: {DIR_ENTRADA}")
+        return
+
+    print(f"🔎 Encontradas {len(arquivos)} imagens para processar.\n")
+    
+    sucessos = 0
+    for arquivo in arquivos:
+        if processar_foto(arquivo):
+            sucessos += 1
+            
+    print(f"\n🚀 Processamento concluído. {sucessos}/{len(arquivos)} imagens geradas.")
+    print(f"📂 Resultados disponíveis em: {DIR_SAIDA}")
+
+if __name__ == "__main__":
+    # Se passar argumento, processa só um. Se não, varre a pasta.
+    if len(sys.argv) > 1:
+        arquivo_alvo = Path(sys.argv[1])
+        # Se o usuário passou só o nome, assumimos que está na pasta de input
+        if not arquivo_alvo.exists():
+            arquivo_alvo = DIR_ENTRADA / sys.argv[1]
+        
+        if arquivo_alvo.exists():
+            print("👁️  Modo Manual Ativado")
+            processar_foto(arquivo_alvo)
+            print(f"📂 Saída: {DIR_SAIDA}")
+        else:
+            print(f"❌ Arquivo não encontrado: {arquivo_alvo}")
+    else:
+        executar_pipeline()
+[1;33m⬇️  FIM DE vision_processor.py[0m
+
+[0;36m==================================================[0m
+[0;36m📁 ARQUIVO: ./Agentes_Voz/voice_synthesizer.py[0m
+[0;36m==================================================[0m
+#!/usr/bin/env python3
+"""
+NÍVEL 4: Sintetizador de Inteligência Auditiva (Voice Cloner)
+FUNÇÃO: Processamento de áudio e síntese vocal (TTS) com auto-conversão de formatos.
+CONCEITOS: DSP, Wrappers de FFmpeg, Pipeline de Áudio Automatizado.
+"""
+
+import sys
+import os
+import subprocess
+import shutil
+from pathlib import Path
+# [NOVO] Aceite automático da licença para não travar o robô
+os.environ["COQUI_TOS_AGREED"] = "1"
+import torch
+from TTS.api import TTS
+
+# --- BOOTSTRAP: CONEXÃO COM O SETTINGS ---
+BASE_DIR = Path(__file__).resolve().parent.parent
+if str(BASE_DIR) not in sys.path:
+    sys.path.append(str(BASE_DIR))
+
+try:
+    from Config.settings import DIRS
+    DIR_ENTRADA = DIRS["IN_VOICE"]   # Data/input_audio
+    DIR_SAIDA = DIRS["OUT_VOICE"]    # Data/output_audio
+except ImportError:
+    # Fallback
+    DIR_ENTRADA = BASE_DIR / "Data" / "input_audio"
+    DIR_SAIDA = BASE_DIR / "Data" / "output_audio"
+
+# Garante infraestrutura
+DIR_ENTRADA.mkdir(parents=True, exist_ok=True)
+DIR_SAIDA.mkdir(parents=True, exist_ok=True)
+
+# --- CONFIGURAÇÃO DE ARQUIVOS ---
+NOME_ROTEIRO = "roteiro.txt"
+NOME_REF_M4A = "referencia.m4a"
+NOME_REF_WAV = "referencia.wav"
+NOME_FINAL = "audio_clonado_final.wav"
+
+def preparar_audio_referencia():
+    """Converte M4A para WAV automaticamente se necessário."""
+    caminho_m4a = DIR_ENTRADA / NOME_REF_M4A
+    caminho_wav = DIR_ENTRADA / NOME_REF_WAV
+
+    # Se já tem o WAV, beleza.
+    if caminho_wav.exists():
+        print(f"✅ Áudio de referência (WAV) encontrado: {caminho_wav.name}")
+        return caminho_wav
+
+    # Se não tem WAV, mas tem M4A, converte.
+    if caminho_m4a.exists():
+        print(f"🔄 Convertendo {caminho_m4a.name} para WAV...")
+        try:
+            comando = [
+                'ffmpeg', '-i', str(caminho_m4a), 
+                str(caminho_wav), '-y', '-loglevel', 'error'
+            ]
+            subprocess.run(comando, check=True)
+            print("✅ Conversão concluída com sucesso.")
+            return caminho_wav
+        except Exception as e:
+            print(f"❌ Erro ao converter áudio (Você tem ffmpeg instalado?): {e}")
+            return None
+            
+    print(f"❌ ERRO: Nenhum arquivo de voz encontrado em {DIR_ENTRADA}")
+    print(f"   👉 Coloque '{NOME_REF_M4A}' ou '{NOME_REF_WAV}' lá.")
+    return None
+
+def ler_roteiro():
+    caminho_roteiro = DIR_ENTRADA / NOME_ROTEIRO
+    if not caminho_roteiro.exists():
+        print(f"❌ Roteiro não encontrado: {caminho_roteiro}")
+        print(f"   👉 Crie um arquivo '{NOME_ROTEIRO}' em {DIR_ENTRADA}")
+        return None
+    
+    with open(caminho_roteiro, "r", encoding="utf-8") as f:
+        return f.read()
+
+def processar_sintese():
+    print("🎬 Iniciando Estúdio de Voz (V4 - Auto)...")
+    
+    # 1. Preparação de Arquivos
+    arquivo_ref = preparar_audio_referencia()
+    if not arquivo_ref: return
+
+    texto_bruto = ler_roteiro()
+    if not texto_bruto: return
+
+    # 2. Processamento de Texto
+    texto_limpo = texto_bruto.replace("\n", " ")
+    frases = [f.strip() for f in texto_limpo.replace("!", ".").replace("?", ".").split(".") if len(f.strip()) > 2]
+    
+    print(f"✂️  Roteiro dividido em {len(frases)} blocos.")
+
+    # 3. Carregar IA
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    print(f"⏳ Carregando modelo XTTS (Dispositivo: {device})...")
+    try:
+        tts = TTS("tts_models/multilingual/multi-dataset/xtts_v2").to(device)
+    except Exception as e:
+        print(f"❌ Erro ao carregar modelo TTS: {e}")
+        return
+
+    # 4. Geração em Loop
+    pasta_temp = DIR_SAIDA / "temp_parts"
+    pasta_temp.mkdir(exist_ok=True)
+    
+    arquivos_gerados = []
+    print("🎙️  Gravando...")
+
+    for i, frase in enumerate(frases):
+        caminho_temp = pasta_temp / f"parte_{i:03d}.wav"
+        print(f"   [{i+1}/{len(frases)}] Sintetizando: \"{frase[:30]}...\"")
+        
+        try:
+            tts.tts_to_file(
+                text=frase,
+                speaker_wav=str(arquivo_ref),
+                language="pt",
+                file_path=str(caminho_temp)
+            )
+            arquivos_gerados.append(caminho_temp)
+        except Exception as e:
+            print(f"   ⚠️ Falha no bloco {i}: {e}")
+
+    # 5. Unificação (Merge)
+    if arquivos_gerados:
+        print("🔗 Unificando áudios...")
+        caminho_lista = pasta_temp / "lista_files.txt"
+        caminho_final = DIR_SAIDA / NOME_FINAL
+        
+        with open(caminho_lista, "w") as f:
+            for arq in arquivos_gerados:
+                f.write(f"file '{arq.name}'\n")
+        
+        # Comando FFmpeg para concatenar
+        cmd = f"ffmpeg -f concat -safe 0 -i {caminho_lista} -c copy {caminho_final} -y -loglevel error"
+        
+        # Executa comando no diretório da pasta temporária para evitar problemas de path
+        subprocess.run(cmd, shell=True, cwd=pasta_temp)
+        
+        # Limpeza
+        shutil.rmtree(pasta_temp)
+        print(f"\n✅ SUCESSO ABSOLUTO!\n   🎧 Ouça agora: {caminho_final}")
+    else:
+        print("❌ Nenhum áudio foi gerado.")
+
+if __name__ == "__main__":
+    processar_sintese()
+[1;33m⬇️  FIM DE voice_synthesizer.py[0m
+
+[0;36m==================================================[0m
+[0;36m📁 ARQUIVO: ./Config/settings.py[0m
+[0;36m==================================================[0m
+"""
+NÍVEL 1: Gestor de Ambiente e Caminhos (Versão Agentes V2)
+FUNÇÃO: Centraliza a inteligência de diretórios e separação por tipo de dado.
+CONCEITOS: Abstração de Caminhos, Configuração Centralizada, Higiene de Dados.
+"""
+
+import os
+from pathlib import Path
+
+# Caminho Base do Projeto (Raiz da ToolBox)
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# 1. Definição dos Novos Domínios de Agentes e Infraestrutura
+DIRS = {
+    # Domínios de Agentes (Lógica/Scripts)
+    "AGENTES_DADOS": BASE_DIR / "Agentes_Dados",
+    "AGENTES_MONITOR": BASE_DIR / "Agentes_Monitor",
+    "AGENTES_VISAO": BASE_DIR / "Agentes_Visao",
+    "AGENTES_VOZ": BASE_DIR / "Agentes_Voz",
+    
+    # Infraestrutura
+    "CONFIG": BASE_DIR / "Config",
+    "SCRIPTS": BASE_DIR / "Scripts",
+    "LOGS": BASE_DIR / "Logs",
+    "ASSETS": BASE_DIR / "Assets",
+    
+    # Repositório Central de Dados (Persistência Estruturada)
+    "DATA": BASE_DIR / "Data",
+    "JSON": BASE_DIR / "Data" / "json",
+    "CSV": BASE_DIR / "Data" / "csv",
+    
+    # Pipelines de I/O de Mídia (Binários)
+    "IN_IMAGES": BASE_DIR / "Data" / "input_images",
+    "OUT_IMAGES": BASE_DIR / "Data" / "output_images",
+    "IN_VOICE": BASE_DIR / "Data" / "input_audio",
+    "OUT_VOICE": BASE_DIR / "Data" / "output_audio"
+}
+
+# 2. Automação de Infraestrutura: Garante que TODAS as pastas existam
+for folder_path in DIRS.values():
+    folder_path.mkdir(parents=True, exist_ok=True)
+
+# 3. Configurações de Logs Globais
+LOGGING_CONF = {
+    "format": '%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    "datefmt": '%Y-%m-%d %H:%M:%S',
+    "arquivo_log": DIRS["LOGS"] / "system_toolbox.log"
+}
+
+# 4. Configurações de Câmbio (Agora apontando para a subpasta CSV)
+CAMBIO_CONFIG = {
+    "url_api": "https://economia.awesomeapi.com.br/last/USD-BRL",
+    "arquivo_saida": DIRS["CSV"] / "cotacao_dolar.csv"
+}
+[1;33m⬇️  FIM DE settings.py[0m
+
+[0;36m==================================================[0m
+[0;36m📁 ARQUIVO: ./main.py[0m
+[0;36m==================================================[0m
+#!/usr/bin/env python3 
+"""
+ORQUESTRADOR: main.py
+FUNÇÃO: Gerador de Documentação Viva (Living Documentation).
+DESCRIÇÃO: Varre a estrutura do projeto e atualiza todos os README.md automaticamente.
+STATUS: Operacional - Modo Bibliotecário Sênior 
+"""
+
+import os
+import re
+import subprocess
+from pathlib import Path
+
+# --- CONFIGURAÇÕES DE IGNORAR ---
+# Apenas lixo de sistema e controle de versão. Pastas de output SÃO PERMITIDAS.
+DIRS_IGNORADOS = {'.venv', '__pycache__', '.git', '.idea', '.vscode'}
+
+# --- 1. MANIFESTO DO PROJETO ---
+MANIFESTO = """# 🛠️ ToolBox - Ecossistema de Agentes Autônomos
+
+### 📂 Visão Geral e Arquitetura
+Este repositório opera através de **Agentes Especializados** e uma infraestrutura de dados organizada por tipos e domínios.
+
+* **Agentes de Dados:** Inteligência de busca, scraping e coleta de dados.
+* **Agentes de Visao:** Processamento de imagem, higienização e privacidade.
+* **Agentes de Voz:** Síntese vocal (TTS/XTTS) e inteligência auditiva.
+* **Infraestrutura:** Gestão de logs, configurações e persistência de dados.
+
+---
+"""
+
+# --- 2. STACK TECNOLÓGICO DETALHADO (RESTAURADO) ---
+STACK_TECNOLOGICO = """
+---
+### 🛠️ Stack Tecnológico e Engenharia
+- **Core Executivo:** Python 3.10+ & Bash Scripting (Automação de Infraestrutura).
+- **Domínios de Inteligência:**
+    - `Coqui TTS (XTTS v2)`: Clonagem de voz Neural e Síntese de Fala de alta fidelidade.
+    - `Pillow (PIL)`: Pipeline de processamento de imagem e manipulação de metadados.
+    - `Requests` & `BeautifulSoup4`: Engenharia de extração e consumo de dados.
+- **Resiliência e Monitoramento:**
+    - `Logging (RotatingFileHandler)`: Gestão de logs cíclicos com controle de volumetria.
+    - `Subprocess`: Orquestração de comandos do sistema operacional (Fedora/Linux).
+- **Arquitetura de Dados:**
+    - **Persistência Estruturada:** Armazenamento em CSV (Séries) e JSON (Metadados).
+    - **Estratégia de I/O:** Separação rigorosa entre `input_` (Matéria-prima) e `output_` (Processados).
+    - **Living Documentation:** Mapeamento dinâmico via `main.py` (incluindo estruturas vazias via `.gitkeep`).
+"""
+
+# --- 3. DEFINIÇÕES POR DOMÍNIO ---
+DEFINICOES = {
+    "Agentes_Dados": "Coleta e processamento de notícias e oportunidades (Scraping/RSS).",
+    "Agentes_Visao": "Processamento de imagens, filtros e remoção de metadados.",
+    "Agentes_Voz": "Conversão de texto em fala (TTS/XTTS) e inteligência auditiva.",
+    "Agentes_Monitor": "Monitoramento de integridade web e diagnóstico de hardware/OS.",
+    "Scripts": "Utilitários de manutenção, backup e automação de infraestrutura.",
+    "Config": "Cérebro do projeto (Settings, caminhos absolutos e variáveis).",
+    "Data": "Repositório central organizado por subpastas (csv, json, images, audio).",
+    "Logs": "Registro de atividades, histórico de erros e auditoria."
+}
+
+MAPA_MODULOS = {
+    "Agentes_Dados": "### 🛰️ /Agentes_Dados",
+    "Agentes_Visao": "### 👁️ /Agentes_Visao",
+    "Agentes_Voz": "### 🎙️ /Agentes_Voz",
+    "Agentes_Monitor": "### 🖥️ /Agentes_Monitor",
+    "Scripts": "### 📜 /Scripts",
+    "Data": "### 📊 /Data",
+    "Logs": "### 📝 /Logs"
+}
+
+# --- 4. LÓGICA DE EXTRAÇÃO E AUDITORIA ---
+
+def extrair_docstring(filepath):
+    """Lê o cabeçalho do arquivo para explicar o que ele faz."""
+    try:
+        with open(filepath, 'r', encoding='utf-8') as f:
+            conteudo = f.read()
+            if filepath.endswith('.py'):
+                match = re.search(r'"""(.*?)"""', conteudo, re.DOTALL)
+                if match: return f" | *{match.group(1).strip().replace(chr(10), ' ')}*"
+            elif filepath.endswith('.sh'):
+                comentarios = []
+                for l in conteudo.split('\n'):
+                    if l.startswith('#') and '!' not in l:
+                        comentarios.append(l.replace('#', '').strip())
+                if comentarios: return f" | *{' '.join(comentarios[:1])}*"
+    except: pass
+    return ""
+
+def get_git_info(filepath):
+    """Pega a data da última modificação real no Git."""
+    try:
+        cmd = ['git', 'log', '-1', '--format=%cd', '--date=short', filepath]
+        result = subprocess.run(cmd, capture_output=True, text=True)
+        return f"({result.stdout.strip()})" if result.stdout.strip() else "(Novo/Local)"
+    except: return "(Local)"
+
+def gerar_lista_arquivos(pasta_raiz, link_relativo=True):
+    linhas = []
+    
+    # Varredura
+    for root, dirs, files in os.walk(pasta_raiz):
+        # Filtra pastas ignoradas
+        dirs[:] = [d for d in dirs if d not in DIRS_IGNORADOS]
+        
+        for f in files:
+            # Regra de Ouro: Ignora ocultos, EXCETO .gitkeep
+            if f.startswith('.') and f != '.gitkeep': continue 
+            if f == 'README.md': continue
+            
+            caminho_completo = os.path.join(root, f)
+            nome_exibicao = os.path.relpath(caminho_completo, pasta_raiz)
+            
+            # Definição de Ícones e Descrições
+            icone = "📄"
+            info_git = get_git_info(caminho_completo)
+            desc = extrair_docstring(caminho_completo)
+            
+            if f == '.gitkeep':
+                icone = "📂"
+                # Remove o nome .gitkeep da exibição para ficar mais limpo
+                pasta_pai = os.path.dirname(nome_exibicao)
+                nome_exibicao = f"{pasta_pai}/ (Estrutura)"
+                desc = " | *Diretório de Output (Mantido via .gitkeep)*"
+            elif f.endswith('.py'): icone = "🐍"
+            elif f.endswith('.sh'): icone = "🐚"
+            elif f.endswith(('.wav', '.mp3')): icone = "🔊"
+            elif f.endswith(('.jpg', '.png')): icone = "🖼️"
+            elif f.endswith('.json'): icone = "⚙️"
+            
+            # Cria o link Markdown
+            prefixo = f"./{pasta_raiz}/" if not link_relativo else "./"
+            # Se for gitkeep, o link aponta para a pasta
+            link = f"{prefixo}{os.path.dirname(os.path.relpath(caminho_completo, pasta_raiz))}" if f == '.gitkeep' else f"{prefixo}{nome_exibicao}"
+            
+            if f == '.gitkeep':
+                 linhas.append(f"- {icone} **[{nome_exibicao}]({link})** {desc}")
+            else:
+                 linhas.append(f"- {icone} **[{nome_exibicao}]({link})** {info_git}{desc}")
+
+    return sorted(linhas) if linhas else ["- *Pasta vazia.*"]
+
+# --- 5. EXECUÇÃO ---
+
+def main():
+    print(f"📚 Iniciando Bibliotecário ToolBox em: {os.getcwd()}")
+    
+    # 1. Gera o README.md Principal (Raiz)
+    conteudo_raiz = MANIFESTO
+    
+    for pasta, header in MAPA_MODULOS.items():
+        if os.path.exists(pasta):
+            print(f"   - Indexando: {pasta}...")
+            conteudo_raiz += f"\n{header}\n> {DEFINICOES.get(pasta, '')}\n\n"
+            conteudo_raiz += "\n".join(gerar_lista_arquivos(pasta, link_relativo=False)) + "\n"
+            
+    conteudo_raiz += STACK_TECNOLOGICO
+    
+    with open('README.md', 'w', encoding='utf-8') as f:
+        f.write(conteudo_raiz)
+    
+    # 2. Gera os READMEs Internos (Dentro de cada pasta)
+    for pasta in DEFINICOES.keys():
+        if os.path.exists(pasta):
+            with open(os.path.join(pasta, "README.md"), 'w', encoding='utf-8') as f:
+                f.write(f"# 📁 Módulo: {pasta}\n\n> {DEFINICOES[pasta]}\n\n## 🧰 Estrutura e Ferramentas\n")
+                f.write("\n".join(gerar_lista_arquivos(pasta, link_relativo=True)))
+
+    print("✅ Documentação Viva atualizada (Stack Sênior + Outputs)!")
+
+if __name__ == "__main__":
+    main()
+[1;33m⬇️  FIM DE main.py[0m
+
+[0;32m✅ Auditoria Finalizada.[0m

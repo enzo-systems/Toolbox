@@ -52,7 +52,8 @@ DEFINICOES = {
     "Agentes_Dados": "Coleta e processamento de notícias e oportunidades (Scraping/RSS).",
     "Agentes_Visao": "Processamento de imagens, filtros e remoção de metadados.",
     "Agentes_Voz": "Conversão de texto em fala (TTS/XTTS) e inteligência auditiva.",
-    "Agentes_Monitor": "Monitoramento de integridade web e diagnóstico de hardware/OS.",
+    "Agentes_Monitor": "Monitoramento de integridade web e diagnóstico de hardware/OS.", 
+    "Agentes_Sondagem_Recon": "Ferramentas de análise de alvos, engenharia reversa e descoberta de endpoints.",    
     "Scripts": "Utilitários de manutenção, backup e automação de infraestrutura.",
     "Config": "Cérebro do projeto (Settings, caminhos absolutos e variáveis).",
     "Data": "Repositório central organizado por subpastas (csv, json, images, audio).",
@@ -63,7 +64,9 @@ MAPA_MODULOS = {
     "Agentes_Dados": "### 🛰️ /Agentes_Dados",
     "Agentes_Visao": "### 👁️ /Agentes_Visao",
     "Agentes_Voz": "### 🎙️ /Agentes_Voz",
-    "Agentes_Monitor": "### 🖥️ /Agentes_Monitor",
+    "Agentes_Monitor": "### 🖥️ /Agentes_Monitor",    
+    "Agentes_Sondagem_Recon": "### 🕵️ /Agentes_Sondagem_Recon",
+    
     "Scripts": "### 📜 /Scripts",
     "Data": "### 📊 /Data",
     "Logs": "### 📝 /Logs"

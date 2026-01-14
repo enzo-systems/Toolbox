@@ -76,7 +76,7 @@ try:
     webbrowser.get('firefox').open(site)
 except:
     webbrowser.open(site)
-
+    
 # 3. Login
 if esperar_e_clicar("campo_email_automatizar_visual.png", offset_y=35):
     pyautogui.write("hackeando_hashtag@gmail.com")    

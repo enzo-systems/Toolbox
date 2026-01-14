@@ -13,7 +13,8 @@
 - 📂 **[output_audio/ (Estrutura)](./output_audio)**  | *Diretório de Output (Mantido via .gitkeep)*
 - 📂 **[output_images/ (Estrutura)](./output_images)**  | *Diretório de Output (Mantido via .gitkeep)*
 - 📄 **[csv/cotacao_dolar.csv](./csv/cotacao_dolar.csv)** (2026-01-08)
-- 📄 **[csv/produtos_automacao_formulario.csv](./csv/produtos_automacao_formulario.csv)** (Novo/Local)
+- 📄 **[csv/produtos_automacao_formulario.csv](./csv/produtos_automacao_formulario.csv)** (2026-01-14)
+- 📄 **[csv/produtos_automacao_formulario2.csv](./csv/produtos_automacao_formulario2.csv)** (Novo/Local)
 - 📄 **[input_audio/referencia.m4a](./input_audio/referencia.m4a)** (2026-01-08)
 - 📄 **[input_audio/roteiro.txt](./input_audio/roteiro.txt)** (2026-01-08)
 - 🖼️ **[input_images/perfil.jpg](./input_images/perfil.jpg)** (Novo/Local)

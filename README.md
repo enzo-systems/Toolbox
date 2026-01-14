@@ -40,6 +40,7 @@ Este repositório opera através de **Agentes Especializados** e uma infraestrut
 ### 📜 /Scripts
 > Utilitários de manutenção, backup e automação de infraestrutura.
 
+- 🐚 **[audit_project.sh](./Scripts/audit_project.sh)** (Novo/Local) | *============================================================*
 - 🐚 **[backup_toolbox.sh](./Scripts/backup_toolbox.sh)** (2026-01-07) | *NÍVEL 1: Automação de Infraestrutura*
 
 ### 📊 /Data
@@ -55,7 +56,8 @@ Este repositório opera através de **Agentes Especializados** e uma infraestrut
 - 📂 **[output_audio/ (Estrutura)](./Data/output_audio)**  | *Diretório de Output (Mantido via .gitkeep)*
 - 📂 **[output_images/ (Estrutura)](./Data/output_images)**  | *Diretório de Output (Mantido via .gitkeep)*
 - 📄 **[csv/cotacao_dolar.csv](./Data/csv/cotacao_dolar.csv)** (2026-01-08)
-- 📄 **[csv/produtos_automacao_formulario.csv](./Data/csv/produtos_automacao_formulario.csv)** (Novo/Local)
+- 📄 **[csv/produtos_automacao_formulario.csv](./Data/csv/produtos_automacao_formulario.csv)** (2026-01-14)
+- 📄 **[csv/produtos_automacao_formulario2.csv](./Data/csv/produtos_automacao_formulario2.csv)** (Novo/Local)
 - 📄 **[input_audio/referencia.m4a](./Data/input_audio/referencia.m4a)** (2026-01-08)
 - 📄 **[input_audio/roteiro.txt](./Data/input_audio/roteiro.txt)** (2026-01-08)
 - 🖼️ **[input_images/perfil.jpg](./Data/input_images/perfil.jpg)** (Novo/Local)
