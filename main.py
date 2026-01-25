@@ -11,6 +11,7 @@ System: Debian Linux
 import sys
 import time
 import logging
+import scraper  # <--- [NOVO] O Módulo Scraper é carregado aqui
 
 # [1] Configuração de Logging (A "Caixa Preta" do Avião)
 logging.basicConfig(
@@ -40,9 +41,24 @@ def processar_comando(comando):
     elif cmd == "help":
         print("\n--- COMANDOS DISPONÍVEIS ---")
         print("1. finance  -> Agente de Mercado (Em breve)")
-        print("2. scraper  -> Agente de Coleta (Em breve)")
+        print("2. scraper  -> Agente de Coleta (ATIVO)") # <--- Atualizado
         print("3. system   -> Monitoramento Linux")
         print("----------------------------\n")
+
+    # [Gatilho para o Scraper]
+    elif cmd.startswith("scraper"):
+        # Define um alvo padrão caso você digite apenas "scraper"
+        alvo = "https://www.google.com"
+        
+        # Se você digitar "scraper https://uol.com.br", ele pega o segundo termo
+        partes = comando.split()
+        if len(partes) > 1:
+            alvo = partes[1]
+
+        logging.info("Acionando Agente Scraper...")
+        # Chama a função buscar_titulo que está dentro do arquivo scraper.py
+        resultado = scraper.buscar_titulo(alvo) 
+        print(f"\n>> [RETORNO]: {resultado}\n")
 
     # [Gatilho para Módulos Futuros]
     elif cmd == "system":
