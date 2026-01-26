@@ -47,18 +47,23 @@ def processar_comando(comando):
 
     # [Gatilho para o Scraper]
     elif cmd.startswith("scraper"):
-        # Define um alvo padrão caso você digite apenas "scraper"
-        alvo = "https://www.google.com"
-        
-        # Se você digitar "scraper https://uol.com.br", ele pega o segundo termo
         partes = comando.split()
-        if len(partes) > 1:
-            alvo = partes[1]
-
-        logging.info("Acionando Agente Scraper...")
-        # Chama a função buscar_titulo que está dentro do arquivo scraper.py
-        resultado = scraper.buscar_titulo(alvo) 
-        print(f"\n>> [RETORNO]: {resultado}\n")
+        
+        # Se o usuário digitar: "scraper news"
+        if len(partes) > 1 and partes[1] == "news":
+            logging.info("Modo Sniper ativado: Buscando notícias no Python.org...")
+            resultado = scraper.buscar_noticias_python()
+            print(f"\n>> [DADO EXTRAÍDO]: {resultado}\n")
+            
+        else:
+            # Modo Padrão (Se digitar só "scraper" ou "scraper google.com")
+            alvo = "https://www.google.com"
+            if len(partes) > 1:
+                alvo = partes[1]
+            
+            logging.info("Acionando Agente Scraper (Modo Genérico)...")
+            resultado = scraper.buscar_titulo(alvo) 
+            print(f"\n>> [RETORNO]: {resultado}\n")
 
     # [Gatilho para Módulos Futuros]
     elif cmd == "system":
