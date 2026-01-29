@@ -1,0 +1,16 @@
+apt-listchanges==4.8
+certifi==2025.1.31
+chardet==5.2.0
+charset-normalizer==3.4.2
+idna==3.10
+mutagen==1.47.0
+packaging==25.0
+pycryptodomex==3.20.0
+PyGObject==3.50.0
+python-apt==3.0.0
+requests==2.32.3
+ufw==0.36.2
+urllib3==2.3.0
+websockets==15.0.1
+wheel==0.46.1
+yt-dlp==2025.4.30

@@ -1,103 +1,73 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Arquivo: main.py
 
 """
-Enzo ToolBox - Orchestrator (Cérebro Central)
-Arquitetura: Modular Monolithic
-Author: Enzo (O Arquiteto)
-System: Debian Linux
+Enzo ToolBox - Orchestrator V1.3
+Refatorado para arquitetura modular profunda (Nested Packages).
 """
 
 import sys
-import time
 import logging
-import scraper  # <--- [NOVO] O Módulo Scraper é carregado aqui
+import time
 
-# [1] Configuração de Logging (A "Caixa Preta" do Avião)
+# 1. Integração com o Cérebro de Configuração
+# Garante que sabemos onde estamos no disco antes de qualquer coisa
+from config.settings import BASE_DIR
+
+# 2. Importação do Agente Realocado
+# Caminho antigo: from agents import kernel_probe
+# Caminho novo (Lógico -> Físico): agents.monitor.kernel -> agents/monitor/kernel.py
+from agents.monitor import kernel
+
+# Configuração de Logs
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - [KERNEL] - %(levelname)s - %(message)s',
-    handlers=[logging.StreamHandler()] # Joga o log no Terminal
+    format='%(asctime)s - [ORCHESTRATOR] - %(levelname)s - %(message)s'
 )
 
-def inicializar_motor():
-    """Prepara o ambiente, carrega configs e verifica conexões."""
-    logging.info("Inicializando sistemas... Alocando memória.")
-    # Aqui carregaremos as variáveis de ambiente (.env) futuramente
-    time.sleep(0.5) # Simulação de carga de drivers
-    logging.info("Motor V12 pronto. Aguardando input.")
-
 def processar_comando(comando):
-    """
-    O Router. Decide para qual 'Agente' mandar a tarefa.
-    Não resolve nada, apenas delega.
-    """
+    """Dispatcher: Recebe string -> Aciona Ponteiro de Função"""
     cmd = comando.lower().strip()
 
     if cmd == "exit":
-        logging.info("Desligando motores...")
+        logging.info("Encerrando processo (SIGTERM voluntário).")
         sys.exit(0)
     
+    elif cmd == "sys":
+        # Aciona a função 'probe' dentro do módulo 'kernel'
+        kernel.probe()
+    
     elif cmd == "help":
-        print("\n--- COMANDOS DISPONÍVEIS ---")
-        print("1. finance  -> Agente de Mercado (Em breve)")
-        print("2. scraper  -> Agente de Coleta (ATIVO)") # <--- Atualizado
-        print("3. system   -> Monitoramento Linux")
-        print("----------------------------\n")
-
-    # [Gatilho para o Scraper]
-    elif cmd.startswith("scraper"):
-        partes = comando.split()
-        
-        # Se o usuário digitar: "scraper news"
-        if len(partes) > 1 and partes[1] == "news":
-            logging.info("Modo Sniper ativado: Buscando notícias no Python.org...")
-            resultado = scraper.buscar_noticias_python()
-            print(f"\n>> [DADO EXTRAÍDO]: {resultado}\n")
-            
-        else:
-            # Modo Padrão (Se digitar só "scraper" ou "scraper google.com")
-            alvo = "https://www.google.com"
-            if len(partes) > 1:
-                alvo = partes[1]
-            
-            logging.info("Acionando Agente Scraper (Modo Genérico)...")
-            resultado = scraper.buscar_titulo(alvo) 
-            print(f"\n>> [RETORNO]: {resultado}\n")
-
-    # [Gatilho para Módulos Futuros]
-    elif cmd == "system":
-        logging.info("Chamando módulo System...")
-        # from agents import system_monitor
-        # system_monitor.run()
-        print(">> [MÓDULO SYSTEM]: CPU: 12% | RAM: 1.4GB (Simulado)")
-
+        print("\n--- MENU DE COMANDOS ---")
+        print("  sys   -> Hardware Probe (/proc reader)")
+        print("  exit  -> Kill process\n")
+    
     else:
-        logging.warning(f"Comando desconhecido: {comando}")
+        logging.warning(f"Instrução inválida: {comando}, tente help")
 
-def main_loop():
-    """
-    O Loop Infinito (Event Loop).
-    Mantém o processo vivo na CPU aguardando interrupções.
-    """
-    inicializar_motor()
-
+def main():
+    print(f"\n[BOOTLOADER] Root Path: {BASE_DIR}")
+    logging.info("Carregando módulos de monitoramento...")
+    time.sleep(0.2) # Debounce simulado
+    
+    print("--- Enzo ToolBox V1.3 (Modular) ---\n")
+    
     while True:
         try:
-            # O cursor piscando é o 'input' bloqueante. 
-            # O processador descansa aqui até você teclar algo.
+            # Input Bloqueante (Aguardando STDIN)
             user_input = input("Enzo@ToolBox:~$ ")
+            
+            if not user_input: continue # Ignora Enter vazio
             processar_comando(user_input)
-        
+            
         except KeyboardInterrupt:
-            # Captura o Ctrl+C para sair com elegância, sem crashar.
-            print("\n")
-            logging.info("Interrupção forçada pelo piloto (Ctrl+C).")
+            # Captura Ctrl+C
+            print("\n[INTERRUPT] Parada forçada pelo usuário.")
             break
         except Exception as e:
-            # O Airbag. Se algo explodir, o programa não fecha, ele loga e continua.
-            logging.error(f"Erro Crítico no Loop Principal: {e}")
+            # Captura Crash não tratado
+            logging.critical(f"RAM Dump (Erro): {e}")
 
-# [2] A Chave de Ignição Segura
 if __name__ == "__main__":
-    main_loop()
+    main()

@@ -1,0 +1,15 @@
+# .gitignore
+**/__pycache__/ 
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+env/
+.idea/
+.vscode/
+*.log
+.DS_Store
+data/
+logs/
+!data/.gitkeep
+!logs/.gitkeep
